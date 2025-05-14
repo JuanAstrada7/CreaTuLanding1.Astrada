@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <ItemListContainer greeting="¡Bienvenido a Caprichos Pastelería! Descubre nuestros productos dulces y especiales." />
+      <ItemListContainer greetings="¡Bienvenido a Caprichos Pastelería! Descubre nuestros productos dulces y especiales." />
     </>
   );
 }
