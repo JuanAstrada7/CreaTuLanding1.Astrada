@@ -6,7 +6,10 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
-        <a className="navbar-brand" href="#">Capricho Pastelería</a>
+        <a className="navbar-brand" href="#">
+          <img src="/src/assets/images.png" alt="Capricho Pastelería" className="logo-img" />
+          Capricho Pastelería
+        </a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span className="navbar-toggler-icon"></span>
         </button>
