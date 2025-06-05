@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom'; // <-- Importa Link
 import './ProductCard.css';
 
 const ProductCard = ({ product, onAddToCart }) => {
@@ -20,6 +21,13 @@ const ProductCard = ({ product, onAddToCart }) => {
       >
         Agregar al carrito
       </button>
+      <Link 
+        to={`/item/${product.id}`} 
+        className="btn btn-primary" 
+        style={{ marginTop: '10px', display: 'inline-block' }}
+      >
+        Ver detalle
+      </Link>
     </div>
   );
 };
