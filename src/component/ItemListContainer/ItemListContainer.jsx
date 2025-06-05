@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ProductCard from '../ProductCard/ProductCard';
 import { useCart } from '../../context/CartContext';
-import products from '../../data/products'; // Importa el array de productos
+import products from '../../data/products';
 import './ItemListContainer.css';
 
 const ItemListContainer = ({ greetings }) => {

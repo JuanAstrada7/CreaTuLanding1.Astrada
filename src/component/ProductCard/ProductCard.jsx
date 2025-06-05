@@ -22,7 +22,6 @@ const ProductCard = ({ product, onAddToCart }) => {
         Ver detalle
       </Link>
 
-      {/* Botón para agregar al carrito - ¡Ahora abajo! */}
       <button
         className="add-to-cart"
         onClick={() => onAddToCart({...product, quantity})}
