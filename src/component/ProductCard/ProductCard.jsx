@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom'; // <-- Importa Link
+import { Link } from 'react-router-dom';
 import './ProductCard.css';
 
 const ProductCard = ({ product, onAddToCart }) => {
@@ -15,19 +15,20 @@ const ProductCard = ({ product, onAddToCart }) => {
         <span>{quantity}</span>
         <button onClick={() => setQuantity(prev => prev + 1)}>+</button>
       </div>
-      <button 
+      <Link
+        to={`/item/${product.id}`}
+        className="btn btn-primary ver-detalle"
+      >
+        Ver detalle
+      </Link>
+
+      {/* Botón para agregar al carrito - ¡Ahora abajo! */}
+      <button
         className="add-to-cart"
         onClick={() => onAddToCart({...product, quantity})}
       >
         Agregar al carrito
       </button>
-      <Link 
-        to={`/item/${product.id}`} 
-        className="btn btn-primary" 
-        style={{ marginTop: '10px', display: 'inline-block' }}
-      >
-        Ver detalle
-      </Link>
     </div>
   );
 };
