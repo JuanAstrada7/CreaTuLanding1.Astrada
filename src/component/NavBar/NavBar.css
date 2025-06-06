@@ -50,6 +50,22 @@
     box-shadow: none;
 }
 
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.dropdown-item {
+  color: #495057;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+  color: #ff6b6b;
+}
+
 .cart-widget {
     margin-left: auto;
     padding: 0.5rem 1rem;

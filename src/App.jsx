@@ -13,6 +13,8 @@ function App() {
         <Routes>
           <Route path="/" element={<ItemListContainer greetings="¡Bienvenido a Caprichos Pastelería!" />} />
           <Route path="/productos" element={<ItemListContainer />} />
+          <Route path="/category/:categoryId" element={<ItemListContainer />} />
+          <Route path="/search/:searchTerm" element={<ItemListContainer />} />
           <Route path="/item/:id" element={<ItemDetailContainer />} />
           <Route path="/contacto" element={<div>Página de Contacto</div>} />
           <Route path="*" element={<div>Página no encontrada</div>} />
