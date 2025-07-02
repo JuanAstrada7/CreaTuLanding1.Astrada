@@ -1,13 +1,19 @@
 import { useCart } from '../../context/CartContext';
+import { useNavigate } from 'react-router-dom'; 
 import './CartWidget.css';
 
 const CartWidget = () => {
-  const { cart } = useCart();
-  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const { getTotalItems } = useCart();
+  const totalItems = getTotalItems();
+  const navigate = useNavigate(); 
+
+  const handleClick = () => {
+    navigate('/cart'); 
+  };
 
   return (
-    <div className="cart-widget">
-      <span className="cart-icon">🛒</span>
+    <div className="cart-widget" onClick={handleClick} style={{ cursor: 'pointer' }}>
+      <img src="/ruta/al/icono-carrito.png" alt="Carrito" />
       {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
     </div>
   );

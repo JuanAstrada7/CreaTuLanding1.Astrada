@@ -3,6 +3,7 @@ import NavBar from './component/NavBar/NavBar';
 import ItemListContainer from './component/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './component/ItemDetailConteiner/ItemDetailContainer';
 import { CartProvider } from './context/CartContext';
+import Cart from './component/Cart/Cart';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/search/:searchTerm" element={<ItemListContainer />} />
           <Route path="/item/:id" element={<ItemDetailContainer />} />
           <Route path="/contacto" element={<div>Página de Contacto</div>} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<div>Página no encontrada</div>} />
         </Routes>
       </BrowserRouter>

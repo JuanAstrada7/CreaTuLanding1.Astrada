@@ -9,12 +9,14 @@ import './ItemListContainer.css';
 const ItemListContainer = ({ greetings }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { addToCart } = useCart();
   const { categoryId, searchTerm } = useParams();
 
   useEffect(() => {
     setLoading(true);
-    
+    setError(null);
+
     new Promise((resolve) => {
       setTimeout(() => {
         resolve(products);
@@ -42,6 +44,7 @@ const ItemListContainer = ({ greetings }) => {
     })
     .catch(error => {
       console.error('Error al cargar productos:', error);
+      setError('Ocurrió un error al cargar los productos.');
       setLoading(false);
     });
   }, [categoryId, searchTerm]);
@@ -52,6 +55,15 @@ const ItemListContainer = ({ greetings }) => {
         <div className="spinner-border text-primary" role="status">
           <span className="visually-hidden">Cargando...</span>
         </div>
+        <p>Cargando productos...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="error-message">
+        <p>{error}</p>
       </div>
     );
   }
