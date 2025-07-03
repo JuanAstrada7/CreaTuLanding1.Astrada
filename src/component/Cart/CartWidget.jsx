@@ -1,5 +1,6 @@
 import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom'; 
+import { FaShoppingCart } from "react-icons/fa";
 import './CartWidget.css';
 
 const CartWidget = () => {
@@ -13,7 +14,7 @@ const CartWidget = () => {
 
   return (
     <div className="cart-widget" onClick={handleClick} style={{ cursor: 'pointer' }}>
-      <img src="/ruta/al/icono-carrito.png" alt="Carrito" />
+      <FaShoppingCart className="cart-icon" />
       {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
     </div>
   );

@@ -82,7 +82,7 @@
 .add-to-cart {
   width: auto;
   padding: 0.8rem 1.5rem;
-  background-color: #28a745;
+  background: linear-gradient(90deg, #ff6b6b 0%, #ffb347 100%);
   color: white;
   border: none;
   border-radius: 4px;
@@ -97,7 +97,7 @@
 }
 
 .add-to-cart:hover {
-  background-color: #218838;
+  background: linear-gradient(90deg, #ffb347 0%, #6c757d 100%);
 }
 
 .add-to-cart:disabled {

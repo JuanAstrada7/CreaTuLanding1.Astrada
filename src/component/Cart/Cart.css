@@ -82,7 +82,7 @@
 }
 
 .cart-empty h2 {
-  color: #333;
+  color: #ac1515;
   margin-bottom: 0.5rem;
 }
 
@@ -90,3 +90,14 @@
   color: #888;
   margin-bottom: 1.5rem;
 }
+
+.btn-primary {
+    background-color: #ff6b6b;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #ff6b6b 0%, #ffb347 100%);
+    border: black;
+}
+
