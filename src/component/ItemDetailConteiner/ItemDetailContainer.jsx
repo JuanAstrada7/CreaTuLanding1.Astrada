@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemDetail from '../ItemDetail/ItemDetail';
-import products from '../../data/products'; 
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../firebaseConfig";
 import './ItemDetailContainer.css';
 
 const ItemDetailContainer = () => {
@@ -11,21 +12,23 @@ const ItemDetailContainer = () => {
 
   useEffect(() => {
     setLoading(true);
-    
-    new Promise((resolve) => {
-      setTimeout(() => {
-        const foundProduct = products.find(p => p.id === parseInt(id));
-        resolve(foundProduct || null);
-      }, 1000);
-    })
-    .then(data => {
-      setProduct(data);
-      setLoading(false);
-    })
-    .catch(error => {
-      console.error('Error al cargar el producto:', error);
-      setLoading(false);
-    });
+
+    const docRef = doc(db, "productos", id);
+    getDoc(docRef)
+      .then(docSnap => {
+        if (docSnap.exists()) {
+          setProduct({ id: docSnap.id, ...docSnap.data() });
+        } else {
+          setProduct(null);
+        }
+      })
+      .catch(error => {
+        console.error('Error al cargar el producto:', error);
+        setProduct(null);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [id]);
 
   if (loading) {

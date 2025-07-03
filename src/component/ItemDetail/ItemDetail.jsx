@@ -36,7 +36,7 @@ const ItemDetail = ({ product }) => {
               <span>{quantity}</span>
               <button onClick={() => setQuantity(prev => Math.min(product.stock, prev + 1))}>+</button>
             </div>
-            <button 
+            <button
               className="add-to-cart"
               onClick={handleAddToCart}
               disabled={product.stock === 0}

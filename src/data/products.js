@@ -35,7 +35,7 @@ const products = [
     category: "tartas",
     stock: 7
   }
-  
+
 ];
 
 export default products;

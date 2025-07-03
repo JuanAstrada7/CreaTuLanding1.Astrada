@@ -3,7 +3,7 @@
   margin: 2rem auto;
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   padding: 2rem;
 }
 
@@ -19,7 +19,8 @@
   border-collapse: collapse;
 }
 
-.cart-container th, .cart-container td {
+.cart-container th,
+.cart-container td {
   padding: 0.75rem;
   text-align: center;
   border-bottom: 1px solid #eee;
@@ -92,12 +93,11 @@
 }
 
 .btn-primary {
-    background-color: #ff6b6b;
-    border: none;
+  background-color: #ff6b6b;
+  border: none;
 }
 
 .btn-primary:hover {
-    background: linear-gradient(90deg, #ff6b6b 0%, #ffb347 100%);
-    border: black;
+  background: linear-gradient(90deg, #ff6b6b 0%, #ffb347 100%);
+  border: black;
 }
-

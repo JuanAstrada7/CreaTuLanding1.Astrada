@@ -4,8 +4,7 @@ const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  const [notification, setNotification] = useState(null); // <-- NUEVO
-
+  const [notification, setNotification] = useState(null);
   const addToCart = (product) => {
     setCart(prevCart => {
       const existing = prevCart.find(item => item.id === product.id);

@@ -1,15 +1,15 @@
 import { useCart } from '../../context/CartContext';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import { FaShoppingCart } from "react-icons/fa";
 import './CartWidget.css';
 
 const CartWidget = () => {
   const { getTotalItems } = useCart();
   const totalItems = getTotalItems();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/cart'); 
+    navigate('/cart');
   };
 
   return (

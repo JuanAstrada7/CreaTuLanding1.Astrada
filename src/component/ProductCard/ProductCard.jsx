@@ -24,7 +24,7 @@ const ProductCard = ({ product, onAddToCart }) => {
 
       <button
         className="add-to-cart"
-        onClick={() => onAddToCart({...product, quantity})}
+        onClick={() => onAddToCart({ ...product, quantity })}
       >
         Agregar al carrito
       </button>

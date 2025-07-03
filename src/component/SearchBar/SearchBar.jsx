@@ -32,7 +32,7 @@ const SearchBar = () => {
         <button type="submit">Buscar</button>
       </form>
 
-      <select 
+      <select
         id="category-select"
         name="category"
         onChange={handleCategoryChange}
