@@ -31,8 +31,8 @@ Capricho Pastelería es una aplicación web de e-commerce desarrollada con React
 
 ## 🛠️ Instalación y uso
 
-- git clone https://github.com/tuusuario/capricho-pasteleria.git
-- cd capricho-pasteleria
+- git clone https://github.com/JuanAstrada7/CreaTuLanding1.Astrada
+- cd proyecto-reacts
 - npm install
 * Configura las variables de entorno:
 - Crea un archivo .env en la raíz del proyecto con tus credenciales de Firebase:
@@ -75,4 +75,4 @@ Las credenciales de Firebase no están incluidas en el repositorio por seguridad
 El deploy puede realizarse fácilmente en Vercel, Netlify o cualquier servicio compatible con React y variables de entorno.
 
 ### 👩‍💻 Autor
-Juan Pablo Astrada [text](https://github.com/JuanAstrada7)
+Juan Pablo Astrada https://github.com/JuanAstrada7
