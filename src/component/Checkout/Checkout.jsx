@@ -58,6 +58,7 @@ const Checkout = () => {
           value={form.name}
           onChange={handleChange}
           required
+          autoComplete="name"
         />
         <input
           type="email"
@@ -66,6 +67,7 @@ const Checkout = () => {
           value={form.email}
           onChange={handleChange}
           required
+          autoComplete="email"
         />
         <input
           type="tel"
@@ -74,6 +76,7 @@ const Checkout = () => {
           value={form.phone}
           onChange={handleChange}
           required
+          autoComplete="tel"
         />
         <button type="submit" disabled={loading}>
           {loading ? "Procesando..." : "Confirmar compra"}
