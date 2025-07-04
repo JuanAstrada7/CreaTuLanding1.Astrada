@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import ProductCard from '../ProductCard/ProductCard';
 import SearchBar from '../SearchBar/SearchBar';
 import { useCart } from '../../context/CartContext';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
+import ItemList from '../ItemList/ItemList';
 import './ItemListContainer.css';
 
 const ItemListContainer = ({ greetings }) => {
@@ -76,23 +76,7 @@ const ItemListContainer = ({ greetings }) => {
             categoryId && categoryId !== 'todos' ? `Productos - ${categoryId}` :
               'Todos los productos')}
       </h2>
-      {filteredProducts.length === 0 ? (
-        <p className="no-products">
-          {searchTerm ?
-            `No se encontraron productos para "${searchTerm}"` :
-            'No hay productos disponibles en esta categoría'}
-        </p>
-      ) : (
-        <div className="products-grid">
-          {filteredProducts.map(product => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onAddToCart={addToCart}
-            />
-          ))}
-        </div>
-      )}
+      <ItemList products={filteredProducts} onAddToCart={addToCart} />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import ItemDetailContainer from './component/ItemDetailConteiner/ItemDetailConta
 import Cart from './component/Cart/Cart';
 import { CartProvider } from './context/CartContext';
 import Notification from './component/Notification/Notification';
+import Checkout from './component/Checkout/Checkout';
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/search/:searchTerm" element={<ItemListContainer />} />
           <Route path="/item/:id" element={<ItemDetailContainer />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/contacto" element={<div>Página de Contacto</div>} />
           <Route path="*" element={<div>Página no encontrada</div>} />
         </Routes>

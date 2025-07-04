@@ -1,0 +1,78 @@
+.checkout-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 32px 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.checkout-container h2 {
+  margin-bottom: 24px;
+  color: #e57373;
+  font-weight: 600;
+}
+
+.checkout-container form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.checkout-container input {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.checkout-container input:focus {
+  border: 1.5px solid #e57373;
+}
+
+.checkout-container button[type="submit"] {
+  background: #e57373;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.checkout-container button[type="submit"]:hover:not(:disabled) {
+  background: #d32f2f;
+}
+
+.checkout-container button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.checkout-success {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 32px 24px;
+  background: #f9fff9;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.checkout-success h2 {
+  color: #388e3c;
+  margin-bottom: 16px;
+}
+
+.checkout-success strong {
+  color: #e57373;
+  font-size: 1.2em;
+}
