@@ -69,6 +69,7 @@ const Login = () => {
         
         <div className="mt-3 text-center">
           <p>¿No tienes cuenta? <a href="/register">Regístrate aquí</a></p>
+          <p><a href="/password-reset">¿Olvidaste tu contraseña?</a></p>
         </div>
       </div>
     </div>

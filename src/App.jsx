@@ -11,6 +11,7 @@ import Login from './component/Login/Login';
 import Register from './component/Register/Register';
 import ProtectedRoute from './component/ProtectedRoute/ProtectedRoute';
 import OrderHistory from './component/OrderHistory/OrderHistory';
+import PasswordReset from './component/PasswordReset/PasswordReset';
 import './App.css';
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/password-reset" element={<PasswordReset />} />
             <Route 
               path="/checkout" 
               element={
