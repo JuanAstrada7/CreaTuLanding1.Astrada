@@ -2,8 +2,19 @@ import React from 'react';
 import './NavBar.css';
 import CartWidget from '../Cart/CartWidget';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const NavBar = () => {
+  const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
@@ -26,7 +37,30 @@ const NavBar = () => {
               <Link className="nav-link" to="/contacto">Contacto</Link>
             </li>
           </ul>
-          <CartWidget />
+          <div className="navbar-nav">
+            {user ? (
+              <>
+                <span className="navbar-text me-3">
+                  Hola, {user.displayName || user.email}
+                </span>
+                <Link className="nav-link me-2" to="/mis-ordenes">
+                  Mis Órdenes
+                </Link>
+                <button 
+                  onClick={handleLogout}
+                  className="btn btn-outline-secondary me-2"
+                >
+                  Cerrar Sesión
+                </button>
+              </>
+            ) : (
+              <>
+                <Link className="nav-link" to="/login">Iniciar Sesión</Link>
+                <Link className="nav-link" to="/register">Registrarse</Link>
+              </>
+            )}
+            <CartWidget />
+          </div>
         </div>
       </div>
     </nav>
