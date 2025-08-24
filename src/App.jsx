@@ -10,8 +10,12 @@ import Checkout from './component/Checkout/Checkout';
 import Login from './component/Login/Login';
 import Register from './component/Register/Register';
 import ProtectedRoute from './component/ProtectedRoute/ProtectedRoute';
+import ProtectedAdminRoute from './component/ProtectedAdminRoute/ProtectedAdminRoute';
 import OrderHistory from './component/OrderHistory/OrderHistory';
 import PasswordReset from './component/PasswordReset/PasswordReset';
+import AdminDashboard from './component/AdminDashboard/AdminDashboard';
+import ProductManagement from './component/ProductManagement/ProductManagement';
+import ProductForm from './component/ProductForm/ProductForm';
 import './App.css';
 
 function App() {
@@ -47,6 +51,44 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+            
+            {/* Rutas de Administración */}
+            <Route 
+              path="/admin" 
+              element={
+                <ProtectedAdminRoute>
+                  <AdminDashboard />
+                </ProtectedAdminRoute>
+              } 
+            />
+            
+            <Route 
+              path="/admin/products" 
+              element={
+                <ProtectedAdminRoute>
+                  <ProductManagement />
+                </ProtectedAdminRoute>
+              } 
+            />
+            
+            <Route 
+              path="/admin/products/new" 
+              element={
+                <ProtectedAdminRoute>
+                  <ProductForm />
+                </ProtectedAdminRoute>
+              } 
+            />
+            
+            <Route 
+              path="/admin/products/edit/:id" 
+              element={
+                <ProtectedAdminRoute>
+                  <ProductForm />
+                </ProtectedAdminRoute>
+              } 
+            />
+            
             <Route path="/contacto" element={<div>Página de Contacto</div>} />
             <Route path="*" element={<div>Página no encontrada</div>} />
           </Routes>

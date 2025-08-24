@@ -5,7 +5,12 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 const NavBar = () => {
-  const { user, logout } = useAuth();
+  const { user, userRole, loading, logout } = useAuth();
+
+  // Agregar logs de depuración
+  console.log('NavBar - Usuario:', user);
+  console.log('NavBar - Rol del usuario:', userRole);
+  console.log('NavBar - Loading:', loading);
 
   const handleLogout = async () => {
     try {
@@ -36,12 +41,18 @@ const NavBar = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/contacto">Contacto</Link>
             </li>
+            {userRole === 'admin' && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/admin">Administración</Link>
+              </li>
+            )}
           </ul>
           <div className="navbar-nav">
             {user ? (
               <>
                 <span className="navbar-text me-3">
                   Hola, {user.displayName || user.email}
+                  {userRole === 'admin' && <span className="badge bg-warning ms-2">Admin</span>}
                 </span>
                 <Link className="nav-link me-2" to="/mis-ordenes">
                   Mis Órdenes
