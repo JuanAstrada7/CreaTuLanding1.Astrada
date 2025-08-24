@@ -91,6 +91,39 @@
   text-align: center;
 }
 
+/* Agregar al final del archivo existente */
+
+.stock-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stock-badge.in-stock {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.stock-badge.low-stock {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.stock-badge.out-of-stock {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.stock-label {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
 @media (max-width: 768px) {
   .header-actions {
     flex-direction: column;

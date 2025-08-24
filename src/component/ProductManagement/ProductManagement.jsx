@@ -21,11 +21,6 @@ const ProductManagement = () => {
         id: doc.id,
         ...doc.data()
       }));
-      
-      // Debug: Ver qué productos se están cargando
-      console.log('Productos cargados:', productsData);
-      console.log('Tipos de ID:', productsData.map(p => ({ id: p.id, type: typeof p.id })));
-      
       setProducts(productsData);
     } catch (error) {
       console.error('Error al cargar productos:', error);
@@ -36,29 +31,9 @@ const ProductManagement = () => {
   };
 
   const handleDelete = async (productId, productName) => {
-    // Debug: Ver qué se está pasando
-    console.log('handleDelete llamado con:', {
-      productId,
-      productName,
-      productIdType: typeof productId,
-      productIdValue: productId
-    });
-
-    // Validar que productId sea válido
-    if (!productId) {
-      console.error('productId es null o undefined');
-      alert('Error: ID de producto inválido');
-      return;
-    }
-
-    // Convertir a string si es necesario
-    const stringId = String(productId);
-    console.log('ID convertido a string:', stringId);
-
     if (window.confirm(`¿Estás seguro de que quieres eliminar "${productName}"?`)) {
       try {
-        console.log('Intentando eliminar documento con ID:', stringId);
-        await deleteDoc(doc(db, 'productos', stringId));
+        await deleteDoc(doc(db, 'productos', productId));
         setProducts(products.filter(product => product.id !== productId));
         alert('Producto eliminado correctamente');
       } catch (error) {
@@ -66,6 +41,12 @@ const ProductManagement = () => {
         alert('Error al eliminar el producto');
       }
     }
+  };
+
+  const getStockStatus = (stock) => {
+    if (stock === 0) return { class: 'out-of-stock', label: 'Sin Stock' };
+    if (stock <= 5) return { class: 'low-stock', label: 'Stock Bajo' };
+    return { class: 'in-stock', label: 'En Stock' };
   };
 
   if (loading) {
@@ -117,45 +98,49 @@ const ProductManagement = () => {
                 </tr>
               </thead>
               <tbody>
-                {products.map(product => (
-                  <tr key={product.id}>
-                    <td>
-                      <img 
-                        src={product.image} 
-                        alt={product.name} 
-                        className="product-thumbnail"
-                      />
-                    </td>
-                    <td>{product.name}</td>
-                    <td>
-                      <span className={`badge bg-${getCategoryColor(product.category)}`}>
-                        {product.category}
-                      </span>
-                    </td>
-                    <td>${product.price}</td>
-                    <td>
-                      <span className={`stock-badge ${product.stock > 0 ? 'in-stock' : 'out-of-stock'}`}>
-                        {product.stock}
-                      </span>
-                    </td>
-                    <td>
-                      <div className="action-buttons">
-                        <Link 
-                          to={`/admin/products/edit/${product.id}`}
-                          className="btn btn-sm btn-primary"
-                        >
-                          ✏️ Editar
-                        </Link>
-                        <button
-                          onClick={() => handleDelete(product.id, product.name)}
-                          className="btn btn-sm btn-danger"
-                        >
-                          🗑️ Eliminar
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                {products.map(product => {
+                  const stockStatus = getStockStatus(product.stock);
+                  return (
+                    <tr key={product.id}>
+                      <td>
+                        <img 
+                          src={product.image} 
+                          alt={product.name} 
+                          className="product-thumbnail"
+                        />
+                      </td>
+                      <td>{product.name}</td>
+                      <td>
+                        <span className={`badge bg-${getCategoryColor(product.category)}`}>
+                          {product.category}
+                        </span>
+                      </td>
+                      <td>${product.price}</td>
+                      <td>
+                        <span className={`stock-badge ${stockStatus.class}`}>
+                          {product.stock}
+                          <small className="stock-label">({stockStatus.label})</small>
+                        </span>
+                      </td>
+                      <td>
+                        <div className="action-buttons">
+                          <Link 
+                            to={`/admin/products/edit/${product.id}`}
+                            className="btn btn-sm btn-primary"
+                          >
+                            ✏️ Editar
+                          </Link>
+                          <button
+                            onClick={() => handleDelete(product.id, product.name)}
+                            className="btn btn-sm btn-danger"
+                          >
+                            🗑️ Eliminar
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

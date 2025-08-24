@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
-import { collection, addDoc, Timestamp } from 'firebase/firestore';
+import { collection, addDoc, Timestamp, doc, getDoc, updateDoc, increment } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import './Checkout.css';
 
@@ -27,29 +27,51 @@ const Checkout = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    const order = {
-      buyer: form,
-      items: cart,
-      date: Timestamp.fromDate(new Date()),
-      total: cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
-      userId: user?.uid || null // Agregar ID del usuario si está autenticado
-    };
+    try {
+      // Verificar stock antes de procesar
+      for (const item of cart) {
+        const productRef = doc(db, 'productos', item.id);
+        const productSnap = await getDoc(productRef);
+        const currentStock = productSnap.data().stock || 0;
+        
+        if (currentStock < item.quantity) {
+          alert(`Stock insuficiente para ${item.name}. Disponible: ${currentStock}`);
+          setLoading(false);
+          return;
+        }
+      }
 
-    addDoc(collection(db, "orders"), order)
-      .then(docRef => {
-        setOrderId(docRef.id);
-        clearCart();
-      })
-      .catch(() => {
-        alert("Error al generar la orden");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      // Crear la orden
+      const order = {
+        buyer: form,
+        items: cart,
+        date: Timestamp.fromDate(new Date()),
+        total: cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
+        userId: user?.uid || null
+      };
+
+      const orderRef = await addDoc(collection(db, "orders"), order);
+
+      // Reducir stock después de crear la orden
+      for (const item of cart) {
+        const productRef = doc(db, 'productos', item.id);
+        await updateDoc(productRef, {
+          stock: increment(-item.quantity)
+        });
+      }
+
+      setOrderId(orderRef.id);
+      clearCart();
+    } catch (error) {
+      console.error('Error al procesar orden:', error);
+      alert("Error al generar la orden");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (orderId) {
@@ -66,44 +88,82 @@ const Checkout = () => {
 
   return (
     <div className="checkout-container">
-      <h2>Finalizar compra</h2>
-      {user && (
-        <div className="alert alert-info">
-          <strong>Usuario autenticado:</strong> {user.displayName || user.email}
+      <div className="container">
+        <h2>Finalizar Compra</h2>
+        
+        <div className="checkout-content">
+          <div className="order-summary">
+            <h3>Resumen de tu orden</h3>
+            {cart.map(item => (
+              <div key={item.id} className="order-item">
+                <img src={item.image} alt={item.name} />
+                <div className="item-details">
+                  <h4>{item.name}</h4>
+                  <p>Cantidad: {item.quantity}</p>
+                  <p>Precio: ${item.price}</p>
+                </div>
+                <div className="item-total">
+                  ${item.price * item.quantity}
+                </div>
+              </div>
+            ))}
+            <div className="order-total">
+              <h4>Total: ${cart.reduce((acc, item) => acc + item.price * item.quantity, 0)}</h4>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="checkout-form">
+            <h3>Información de contacto</h3>
+            
+            <div className="form-group">
+              <label htmlFor="name">Nombre completo *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                required
+                className="form-control"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="email">Email *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                required
+                className="form-control"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="phone">Teléfono *</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={form.phone}
+                onChange={handleChange}
+                required
+                className="form-control"
+              />
+            </div>
+
+            <button 
+              type="submit" 
+              disabled={loading || cart.length === 0}
+              className="btn btn-primary btn-lg w-100"
+            >
+              {loading ? 'Procesando...' : 'Confirmar Compra'}
+            </button>
+          </form>
         </div>
-      )}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Nombre"
-          value={form.name}
-          onChange={handleChange}
-          required
-          autoComplete="name"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-          autoComplete="email"
-        />
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Teléfono"
-          value={form.phone}
-          onChange={handleChange}
-          required
-          autoComplete="tel"
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? "Procesando..." : "Confirmar compra"}
-        </button>
-      </form>
+      </div>
     </div>
   );
 };
