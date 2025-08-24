@@ -16,6 +16,7 @@ import PasswordReset from './component/PasswordReset/PasswordReset';
 import AdminDashboard from './component/AdminDashboard/AdminDashboard';
 import ProductManagement from './component/ProductManagement/ProductManagement';
 import ProductForm from './component/ProductForm/ProductForm';
+import OrderManagement from './component/OrderManagement/OrderManagement';
 import './App.css';
 
 function App() {
@@ -85,6 +86,15 @@ function App() {
               element={
                 <ProtectedAdminRoute>
                   <ProductForm />
+                </ProtectedAdminRoute>
+              } 
+            />
+            
+            <Route 
+              path="/admin/orders" 
+              element={
+                <ProtectedAdminRoute>
+                  <OrderManagement />
                 </ProtectedAdminRoute>
               } 
             />

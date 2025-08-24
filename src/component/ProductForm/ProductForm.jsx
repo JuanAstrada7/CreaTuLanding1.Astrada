@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { doc, getDoc, addDoc, updateDoc, collection } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import './ProductForm.css';
@@ -137,6 +137,7 @@ const ProductForm = () => {
                     value={product.name}
                     onChange={handleChange}
                     className="form-control"
+                    autoComplete="on"
                     required
                   />
                 </div>
@@ -150,6 +151,7 @@ const ProductForm = () => {
                     onChange={handleChange}
                     className="form-control"
                     rows="4"
+                    autoComplete="on"
                     required
                   />
                 </div>
@@ -162,6 +164,7 @@ const ProductForm = () => {
                     value={product.category}
                     onChange={handleChange}
                     className="form-control"
+                    autoComplete="on"
                   >
                     {categories.map(cat => (
                       <option key={cat.value} value={cat.value}>
@@ -186,6 +189,7 @@ const ProductForm = () => {
                       className="form-control"
                       min="0"
                       step="0.01"
+                      autoComplete="on"
                       required
                     />
                   </div>
@@ -201,6 +205,7 @@ const ProductForm = () => {
                     onChange={handleChange}
                     className="form-control"
                     min="0"
+                    autoComplete="on"
                   />
                 </div>
 
@@ -213,6 +218,7 @@ const ProductForm = () => {
                     value={product.image}
                     onChange={handleChange}
                     className="form-control"
+                    autoComplete="on"
                     required
                   />
                 </div>

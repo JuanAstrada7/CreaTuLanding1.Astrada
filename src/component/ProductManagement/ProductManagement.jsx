@@ -21,6 +21,11 @@ const ProductManagement = () => {
         id: doc.id,
         ...doc.data()
       }));
+      
+      // Debug: Ver qué productos se están cargando
+      console.log('Productos cargados:', productsData);
+      console.log('Tipos de ID:', productsData.map(p => ({ id: p.id, type: typeof p.id })));
+      
       setProducts(productsData);
     } catch (error) {
       console.error('Error al cargar productos:', error);
@@ -31,9 +36,29 @@ const ProductManagement = () => {
   };
 
   const handleDelete = async (productId, productName) => {
+    // Debug: Ver qué se está pasando
+    console.log('handleDelete llamado con:', {
+      productId,
+      productName,
+      productIdType: typeof productId,
+      productIdValue: productId
+    });
+
+    // Validar que productId sea válido
+    if (!productId) {
+      console.error('productId es null o undefined');
+      alert('Error: ID de producto inválido');
+      return;
+    }
+
+    // Convertir a string si es necesario
+    const stringId = String(productId);
+    console.log('ID convertido a string:', stringId);
+
     if (window.confirm(`¿Estás seguro de que quieres eliminar "${productName}"?`)) {
       try {
-        await deleteDoc(doc(db, 'productos', productId));
+        console.log('Intentando eliminar documento con ID:', stringId);
+        await deleteDoc(doc(db, 'productos', stringId));
         setProducts(products.filter(product => product.id !== productId));
         alert('Producto eliminado correctamente');
       } catch (error) {
