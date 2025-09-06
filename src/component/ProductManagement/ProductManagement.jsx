@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { collection, getDocs, doc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, deleteDoc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import './ProductManagement.css';
 
@@ -16,15 +16,25 @@ const ProductManagement = () => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const productsSnapshot = await getDocs(collection(db, 'productos'));
-      const productsData = productsSnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setProducts(productsData);
+      console.log('=== CARGANDO PRODUCTOS ===');
+      const querySnapshot = await getDocs(collection(db, 'productos'));
+      const productsList = [];
+      
+      querySnapshot.forEach((doc) => {
+        console.log('Producto encontrado:', doc.id, doc.data());
+        productsList.push({
+          id: doc.data().id || doc.id, // Usar el campo id interno o el ID del documento
+          documentId: doc.id, // Guardar el ID real del documento
+          ...doc.data()
+        });
+      });
+      
+      console.log('Total de productos cargados:', productsList.length);
+      setProducts(productsList);
+      setError(null);
     } catch (error) {
       console.error('Error al cargar productos:', error);
-      setError('Error al cargar los productos');
+      setError('Error al cargar productos');
     } finally {
       setLoading(false);
     }
@@ -33,12 +43,61 @@ const ProductManagement = () => {
   const handleDelete = async (productId, productName) => {
     if (window.confirm(`¿Estás seguro de que quieres eliminar "${productName}"?`)) {
       try {
-        await deleteDoc(doc(db, 'productos', productId));
-        setProducts(products.filter(product => product.id !== productId));
+        // Logs de depuración
+        console.log('=== INICIANDO ELIMINACIÓN ===');
+        console.log('ID original:', productId, 'Tipo:', typeof productId);
+        
+        // Buscar el producto en el estado para obtener el ID real del documento
+        const productToDelete = products.find(p => p.id === productId);
+        if (!productToDelete) {
+          console.error('❌ Producto no encontrado en el estado local');
+          alert('Error: Producto no encontrado');
+          return;
+        }
+        
+        // Usar el ID real del documento (no el campo id interno)
+        const documentId = productToDelete.documentId || productToDelete.id;
+        console.log('ID del documento a eliminar:', documentId);
+        
+        // Verificar que el documento existe antes de eliminar
+        const docRef = doc(db, 'productos', documentId);
+        console.log('Referencia del documento:', docRef.path);
+        
+        // Eliminar de Firestore
+        await deleteDoc(docRef);
+        console.log('✅ Producto eliminado de Firestore');
+        
+        // Verificar que realmente se eliminó
+        try {
+          const docSnapshot = await getDoc(docRef);
+          if (docSnapshot.exists()) {
+            console.error('❌ ERROR: El documento aún existe después de la eliminación');
+            alert('Error: El producto no se pudo eliminar de la base de datos');
+            return;
+          } else {
+            console.log('✅ Confirmado: El documento fue eliminado correctamente');
+          }
+        } catch (verifyError) {
+          console.log('✅ Documento eliminado (error al verificar es normal)');
+        }
+        
+        // Actualizar estado local
+        setProducts(prev => prev.filter(product => product.id !== productId));
+        console.log('✅ Estado local actualizado');
+        
         alert('Producto eliminado correctamente');
       } catch (error) {
-        console.error('Error al eliminar producto:', error);
-        alert('Error al eliminar el producto');
+        console.error('❌ Error al eliminar producto:', error);
+        console.error('Código de error:', error.code);
+        console.error('Mensaje de error:', error.message);
+        
+        if (error.code === 'permission-denied') {
+          alert('Error: No tienes permisos para eliminar productos');
+        } else if (error.code === 'not-found') {
+          alert('Error: El producto no existe');
+        } else {
+          alert(`Error: ${error.message}`);
+        }
       }
     }
   };
@@ -63,6 +122,7 @@ const ProductManagement = () => {
     return (
       <div className="error-container">
         <div className="alert alert-danger">{error}</div>
+        <button onClick={fetchProducts} className="btn btn-primary">Reintentar</button>
       </div>
     );
   }
