@@ -9,6 +9,7 @@ const ProductForm = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [product, setProduct] = useState({
     name: '',
     description: '',
@@ -17,6 +18,11 @@ const ProductForm = () => {
     stock: '',
     image: ''
   });
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+
+  // API key de ImgBB
+  const IMGBB_API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
 
   const categories = [
     { value: 'tortas', label: 'Tortas' },
@@ -45,6 +51,7 @@ const ProductForm = () => {
           stock: docSnap.data().stock || '',
           image: docSnap.data().image || ''
         });
+        setImagePreview(docSnap.data().image || '');
       }
     } catch (error) {
       console.error('Error al cargar producto:', error);
@@ -62,16 +69,79 @@ const ProductForm = () => {
     }));
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Verificar tipo de archivo
+      if (!file.type.startsWith('image/')) {
+        alert('Por favor selecciona un archivo de imagen válido');
+        return;
+      }
+      
+      // Verificar tamaño (máximo 5MB para ImgBB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('La imagen debe ser menor a 5MB');
+        return;
+      }
+      
+      setImageFile(file);
+      
+      // Crear preview local
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const uploadToImgBB = async (file) => {
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+      
+      const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+        method: 'POST',
+        body: formData
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setUploading(false);
+        return data.data.url; // URL pública de la imagen
+      } else {
+        throw new Error(data.error.message || 'Error al subir imagen');
+      }
+    } catch (error) {
+      console.error('Error al subir imagen:', error);
+      setUploading(false);
+      throw error;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!product.name || !product.description || !product.price || !product.image) {
+    if (!product.name || !product.description || !product.price) {
       alert('Por favor completa todos los campos obligatorios');
+      return;
+    }
+
+    if (!product.image && !imageFile) {
+      alert('Por favor selecciona una imagen');
       return;
     }
 
     try {
       setSaving(true);
+      
+      // Subir imagen si hay una nueva
+      let imageURL = product.image;
+      if (imageFile) {
+        imageURL = await uploadToImgBB(imageFile);
+      }
       
       const productData = {
         name: product.name,
@@ -79,7 +149,7 @@ const ProductForm = () => {
         price: Number(product.price),
         category: product.category,
         stock: Number(product.stock),
-        image: product.image
+        image: imageURL
       };
 
       if (id) {
@@ -210,24 +280,32 @@ const ProductForm = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="image">URL de la Imagen *</label>
+                  <label htmlFor="image">Imagen del Producto *</label>
                   <input
-                    type="url"
+                    type="file"
                     id="image"
                     name="image"
-                    value={product.image}
-                    onChange={handleChange}
+                    accept="image/*"
+                    onChange={handleImageChange}
                     className="form-control"
-                    autoComplete="on"
-                    required
                   />
+                  <small className="form-text text-muted">
+                    Máximo 5MB. Formatos: JPG, PNG, GIF, WebP
+                  </small>
+                  
+                  {uploading && (
+                    <div className="uploading">
+                      <p>Subiendo imagen a ImgBB...</p>
+                      <div className="spinner"></div>
+                    </div>
+                  )}
                 </div>
 
-                {product.image && (
+                {imagePreview && (
                   <div className="image-preview">
                     <label>Vista Previa:</label>
                     <img 
-                      src={product.image} 
+                      src={imagePreview} 
                       alt="Vista previa" 
                       className="preview-image"
                       onError={(e) => {
@@ -248,16 +326,16 @@ const ProductForm = () => {
                 type="button"
                 onClick={() => navigate('/admin/products')}
                 className="btn btn-secondary"
-                disabled={saving}
+                disabled={saving || uploading}
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 className="btn btn-primary"
-                disabled={saving}
+                disabled={saving || uploading}
               >
-                {saving ? 'Guardando...' : (id ? 'Actualizar Producto' : 'Agregar Producto')}
+                {saving ? 'Guardando...' : uploading ? 'Subiendo imagen...' : (id ? 'Actualizar Producto' : 'Agregar Producto')}
               </button>
             </div>
           </form>
