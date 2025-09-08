@@ -185,7 +185,7 @@ const ProductManagement = () => {
                       <td>
                         <div className="action-buttons">
                           <Link 
-                            to={`/admin/products/edit/${product.id}`}
+                            to={`/admin/products/edit/${product.documentId}`}
                             className="btn btn-sm btn-primary"
                           >
                             ✏️ Editar
