@@ -59,7 +59,7 @@ const NavBar = () => {
                 </Link>
                 <button 
                   onClick={handleLogout}
-                  className="btn btn-outline-secondary me-2"
+                  className="btn btn-outline-secondary me-2 btn-logout"
                 >
                   Cerrar Sesión
                 </button>

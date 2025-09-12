@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './component/Home/Home';
 import NavBar from './component/NavBar/NavBar';
 import ItemListContainer from './component/ItemListContainer/ItemListContainer';
 import ItemDetailContainer from './component/ItemDetailConteiner/ItemDetailContainer';
@@ -27,7 +28,7 @@ function App() {
           <NavBar />
           <Notification />
           <Routes>
-            <Route path="/" element={<ItemListContainer greetings="¡Bienvenido a Caprichos Pastelería!" />} />
+            <Route path="/" element={<Home />} />
             <Route path="/productos" element={<ItemListContainer />} />
             <Route path="/category/:categoryId" element={<ItemListContainer />} />
             <Route path="/search/:searchTerm" element={<ItemListContainer />} />

@@ -1,0 +1,63 @@
+.home-container {
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+.home-bienvenida {
+  padding: 2rem;
+  text-align: center;
+  background: #f8f8f8;
+}
+
+.home-img {
+  max-width: 400px;
+  width: 100%;
+  border-radius: 1rem;
+  margin: 2rem auto;
+  display: block;
+}
+
+.home-btn-productos {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 2rem;
+  background-color: #e57373;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.home-btn-productos:hover {
+  background-color: #e57373;
+  border: 2px solid #686767;
+}
+
+.home-promociones {
+  background: #ffe4e1;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.home-promociones ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.home-nosotros {
+  background: #f0f0f0;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.home-nosotros p {
+  max-width: 600px;
+  margin: 0 auto;
+}

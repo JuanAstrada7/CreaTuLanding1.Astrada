@@ -3,7 +3,9 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-brand {
+.navbar-brand,
+.navbar-brand:visited,
+.navbar-brand:active {
     font-size: 1.5rem;
     font-weight: 600;
     color: #ff6b6b;
@@ -69,4 +71,15 @@
 .cart-widget {
     margin-left: auto;
     padding: 0.5rem 1rem;
+}
+
+.btn-logout {
+  color: #ff6b6b;
+  border-color: #ff6b6b;
+}
+
+.btn-logout:hover {
+  background-color: #ff6b6b;
+  color: #fff;
+  border-color: #ff6b6b;
 }
