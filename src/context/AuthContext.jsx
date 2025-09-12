@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { 
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword, 
@@ -23,23 +23,19 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState(null);
   const [loading, setLoading] = useState(true);
+  const inactivityTimeout = useRef(null);
 
   // Función para obtener el rol del usuario desde Firestore
   const getUserRole = async (uid) => {
     try {
-      console.log('Obteniendo rol para UID:', uid);
       const userDoc = await getDoc(doc(db, 'users', uid));
       if (userDoc.exists()) {
         const userData = userDoc.data();
-        console.log('Datos del usuario encontrados:', userData);
         const role = userData.role || 'user';
-        console.log('Rol obtenido:', role);
         return role;
       }
-      console.log('Usuario no encontrado en Firestore, rol por defecto: user');
       return 'user'; // Rol por defecto
     } catch (error) {
-      console.error('Error al obtener rol del usuario:', error);
       return 'user';
     }
   };
@@ -48,15 +44,12 @@ export const AuthProvider = ({ children }) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(userCredential.user, { displayName: name });
-      
-      // Crear documento del usuario en Firestore con rol por defecto
       await setDoc(doc(db, 'users', userCredential.user.uid), {
         email: email,
         displayName: name,
         role: 'user',
         createdAt: new Date()
       });
-      
       return userCredential.user;
     } catch (error) {
       throw error;
@@ -86,17 +79,22 @@ export const AuthProvider = ({ children }) => {
     return userRole === 'admin';
   };
 
+  // --- INACTIVIDAD: Cierre de sesión automático ---
+  const startInactivityTimer = () => {
+    clearTimeout(inactivityTimeout.current);
+    inactivityTimeout.current = setTimeout(() => {
+      logout();
+      alert('Sesión cerrada por inactividad');
+    }, 15 * 60 * 1000); // 15 minutos
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      console.log('AuthStateChanged - Usuario:', user);
       setUser(user);
       if (user) {
-        console.log('Usuario autenticado, obteniendo rol...');
         const role = await getUserRole(user.uid);
-        console.log('Rol establecido:', role);
         setUserRole(role);
       } else {
-        console.log('Usuario no autenticado, rol establecido a null');
         setUserRole(null);
       }
       setLoading(false);
@@ -104,6 +102,24 @@ export const AuthProvider = ({ children }) => {
 
     return unsubscribe;
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      const events = ['mousemove', 'keydown', 'click'];
+      events.forEach(event =>
+        window.addEventListener(event, startInactivityTimer)
+      );
+      startInactivityTimer();
+
+      return () => {
+        events.forEach(event =>
+          window.removeEventListener(event, startInactivityTimer)
+        );
+        clearTimeout(inactivityTimeout.current);
+      };
+    }
+  }, [user]);
+  // --- FIN INACTIVIDAD ---
 
   const value = {
     user,
