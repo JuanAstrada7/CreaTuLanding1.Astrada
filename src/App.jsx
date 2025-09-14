@@ -18,6 +18,8 @@ import AdminDashboard from './component/AdminDashboard/AdminDashboard';
 import ProductManagement from './component/ProductManagement/ProductManagement';
 import ProductForm from './component/ProductForm/ProductForm';
 import OrderManagement from './component/OrderManagement/OrderManagement';
+import Contacto from './component/Contacto/Contacto';
+import Footer from './component/Footer/Footer';
 import './App.css';
 
 function App() {
@@ -27,82 +29,85 @@ function App() {
         <BrowserRouter>
           <NavBar />
           <Notification />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/productos" element={<ItemListContainer />} />
-            <Route path="/category/:categoryId" element={<ItemListContainer />} />
-            <Route path="/search/:searchTerm" element={<ItemListContainer />} />
-            <Route path="/item/:id" element={<ItemDetailContainer />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/password-reset" element={<PasswordReset />} />
-            <Route 
-              path="/checkout" 
-              element={
-                <ProtectedRoute>
-                  <Checkout />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/mis-ordenes" 
-              element={
-                <ProtectedRoute>
-                  <OrderHistory />
-                </ProtectedRoute>
-              } 
-            />
-            
-            {/* Rutas de Administración */}
-            <Route 
-              path="/admin" 
-              element={
-                <ProtectedAdminRoute>
-                  <AdminDashboard />
-                </ProtectedAdminRoute>
-              } 
-            />
-            
-            <Route 
-              path="/admin/products" 
-              element={
-                <ProtectedAdminRoute>
-                  <ProductManagement />
-                </ProtectedAdminRoute>
-              } 
-            />
-            
-            <Route 
-              path="/admin/products/new" 
-              element={
-                <ProtectedAdminRoute>
-                  <ProductForm />
-                </ProtectedAdminRoute>
-              } 
-            />
-            
-            <Route 
-              path="/admin/products/edit/:id" 
-              element={
-                <ProtectedAdminRoute>
-                  <ProductForm />
-                </ProtectedAdminRoute>
-              } 
-            />
-            
-            <Route 
-              path="/admin/orders" 
-              element={
-                <ProtectedAdminRoute>
-                  <OrderManagement />
-                </ProtectedAdminRoute>
-              } 
-            />
-            
-            <Route path="/contacto" element={<div>Página de Contacto</div>} />
-            <Route path="*" element={<div>Página no encontrada</div>} />
-          </Routes>
+          <div className="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/productos" element={<ItemListContainer />} />
+              <Route path="/category/:categoryId" element={<ItemListContainer />} />
+              <Route path="/search/:searchTerm" element={<ItemListContainer />} />
+              <Route path="/item/:id" element={<ItemDetailContainer />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/password-reset" element={<PasswordReset />} />
+              <Route path="/contacto" element={<Contacto />} />
+              <Route 
+                path="/checkout" 
+                element={
+                  <ProtectedRoute>
+                    <Checkout />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/mis-ordenes" 
+                element={
+                  <ProtectedRoute>
+                    <OrderHistory />
+                  </ProtectedRoute>
+                } 
+              />
+              
+              {/* Rutas de Administración */}
+              <Route 
+                path="/admin" 
+                element={
+                  <ProtectedAdminRoute>
+                    <AdminDashboard />
+                  </ProtectedAdminRoute>
+                } 
+              />
+              
+              <Route 
+                path="/admin/products" 
+                element={
+                  <ProtectedAdminRoute>
+                    <ProductManagement />
+                  </ProtectedAdminRoute>
+                } 
+              />
+              
+              <Route 
+                path="/admin/products/new" 
+                element={
+                  <ProtectedAdminRoute>
+                    <ProductForm />
+                  </ProtectedAdminRoute>
+                } 
+              />
+              
+              <Route 
+                path="/admin/products/edit/:id" 
+                element={
+                  <ProtectedAdminRoute>
+                    <ProductForm />
+                  </ProtectedAdminRoute>
+                } 
+              />
+              
+              <Route 
+                path="/admin/orders" 
+                element={
+                  <ProtectedAdminRoute>
+                    <OrderManagement />
+                  </ProtectedAdminRoute>
+                } 
+              />
+              
+              <Route path="*" element={<div>Página no encontrada</div>} />
+            </Routes>
+          </div>
+          <Footer />
         </BrowserRouter>
       </CartProvider>
     </AuthProvider>
