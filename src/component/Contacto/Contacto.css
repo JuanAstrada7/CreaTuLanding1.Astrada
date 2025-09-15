@@ -47,3 +47,10 @@
   font-size: 1rem;
   color: #333;
 }
+
+.contacto-mensaje {
+  color: #e57373;
+  font-weight: bold;
+  margin-top: 1rem;
+  text-align: center;
+}
