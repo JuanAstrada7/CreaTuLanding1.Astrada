@@ -2,18 +2,17 @@ import { collection, query, where, getDocs, orderBy, doc, getDoc } from 'firebas
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { db, auth } from '../../firebaseConfig';
 
-// Obtener órdenes de un usuario específico
 export const getUserOrders = async (userId) => {
   try {
     const ordersRef = collection(db, "orders");
     const q = query(
-      ordersRef, 
+      ordersRef,
       where("userId", "==", userId),
       orderBy("date", "desc")
     );
     const querySnapshot = await getDocs(q);
-    return querySnapshot.docs.map(doc => ({ 
-      id: doc.id, 
+    return querySnapshot.docs.map(doc => ({
+      id: doc.id,
       ...doc.data(),
       date: doc.data().date?.toDate()
     }));
@@ -23,7 +22,6 @@ export const getUserOrders = async (userId) => {
   }
 };
 
-// Obtener una orden específica
 export const getOrderById = async (orderId) => {
   try {
     const orderRef = doc(db, "orders", orderId);
@@ -46,7 +44,7 @@ export const resetPassword = async (email) => {
   } catch (error) {
     console.error('Error al enviar email de recuperación:', error);
     let message = 'Error al enviar email de recuperación';
-    
+
     switch (error.code) {
       case 'auth/user-not-found':
         message = 'No existe una cuenta con este email';
@@ -60,7 +58,7 @@ export const resetPassword = async (email) => {
       default:
         message = 'Error al enviar email de recuperación';
     }
-    
+
     throw new Error(message);
   }
 };

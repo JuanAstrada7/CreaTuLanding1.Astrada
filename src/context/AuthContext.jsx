@@ -1,10 +1,10 @@
 import { createContext, useContext, useState, useEffect, useRef } from 'react';
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  signOut, 
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
   onAuthStateChanged,
-  updateProfile 
+  updateProfile
 } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebaseConfig';
@@ -25,7 +25,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const inactivityTimeout = useRef(null);
 
-  // Función para obtener el rol del usuario desde Firestore
   const getUserRole = async (uid) => {
     try {
       const userDoc = await getDoc(doc(db, 'users', uid));
@@ -34,7 +33,7 @@ export const AuthProvider = ({ children }) => {
         const role = userData.role || 'user';
         return role;
       }
-      return 'user'; // Rol por defecto
+      return 'user';
     } catch (error) {
       return 'user';
     }
@@ -74,18 +73,16 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Función para verificar si el usuario es administrador
   const isAdmin = () => {
     return userRole === 'admin';
   };
 
-  // --- INACTIVIDAD: Cierre de sesión automático ---
   const startInactivityTimer = () => {
     clearTimeout(inactivityTimeout.current);
     inactivityTimeout.current = setTimeout(() => {
       logout();
       alert('Sesión cerrada por inactividad');
-    }, 15 * 60 * 1000); // 15 minutos
+    }, 15 * 60 * 1000);
   };
 
   useEffect(() => {
@@ -119,7 +116,6 @@ export const AuthProvider = ({ children }) => {
       };
     }
   }, [user]);
-  // --- FIN INACTIVIDAD ---
 
   const value = {
     user,

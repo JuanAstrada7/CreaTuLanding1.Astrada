@@ -52,7 +52,7 @@ const OrderHistory = () => {
   return (
     <div className="order-history-container">
       <h2>Mi Historial de Compras</h2>
-      
+
       {orders.length === 0 ? (
         <div className="no-orders">
           <div className="text-center">
@@ -84,7 +84,7 @@ const OrderHistory = () => {
                   <span className="badge bg-success">Completada</span>
                 </div>
               </div>
-              
+
               <div className="order-items">
                 {order.items.map((item, index) => (
                   <div key={index} className="order-item">
@@ -100,7 +100,7 @@ const OrderHistory = () => {
                   </div>
                 ))}
               </div>
-              
+
               <div className="order-footer">
                 <div className="order-total">
                   <strong>Total: ${order.total}</strong>

@@ -49,7 +49,7 @@ const Register = () => {
       <div className="register-card">
         <h2>Crear Cuenta</h2>
         {error && <div className="alert alert-danger">{error}</div>}
-        
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Nombre completo</label>
@@ -62,7 +62,7 @@ const Register = () => {
               className="form-control"
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -74,7 +74,7 @@ const Register = () => {
               className="form-control"
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="password">Contraseña</label>
             <input
@@ -86,7 +86,7 @@ const Register = () => {
               className="form-control"
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="confirmPassword">Confirmar contraseña</label>
             <input
@@ -98,16 +98,16 @@ const Register = () => {
               className="form-control"
             />
           </div>
-          
-          <button 
-            type="submit" 
+
+          <button
+            type="submit"
             disabled={loading}
             className="btn btn-primary w-100"
           >
             {loading ? 'Creando cuenta...' : 'Crear Cuenta'}
           </button>
         </form>
-        
+
         <div className="mt-3 text-center">
           <p>¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a></p>
         </div>

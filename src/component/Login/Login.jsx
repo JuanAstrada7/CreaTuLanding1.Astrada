@@ -32,7 +32,7 @@ const Login = () => {
       <div className="login-card">
         <h2>Iniciar Sesión</h2>
         {error && <div className="alert alert-danger">{error}</div>}
-        
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -45,7 +45,7 @@ const Login = () => {
               className="form-control"
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="password">Contraseña</label>
             <input
@@ -57,16 +57,16 @@ const Login = () => {
               className="form-control"
             />
           </div>
-          
-          <button 
-            type="submit" 
+
+          <button
+            type="submit"
             disabled={loading}
             className="btn btn-primary w-100"
           >
             {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
           </button>
         </form>
-        
+
         <div className="mt-3 text-center">
           <p>¿No tienes cuenta? <a href="/register">Regístrate aquí</a></p>
           <p><a href="/password-reset">¿Olvidaste tu contraseña?</a></p>

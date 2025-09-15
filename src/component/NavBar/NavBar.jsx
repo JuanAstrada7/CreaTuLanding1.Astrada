@@ -7,7 +7,6 @@ import { useAuth } from '../../context/AuthContext';
 const NavBar = () => {
   const { user, userRole, loading, logout } = useAuth();
 
-  // Agregar logs de depuración
   console.log('NavBar - Usuario:', user);
   console.log('NavBar - Rol del usuario:', userRole);
   console.log('NavBar - Loading:', loading);
@@ -57,7 +56,7 @@ const NavBar = () => {
                 <Link className="nav-link me-2" to="/mis-ordenes">
                   Mis Órdenes
                 </Link>
-                <button 
+                <button
                   onClick={handleLogout}
                   className="btn btn-outline-secondary me-2 btn-logout"
                 >

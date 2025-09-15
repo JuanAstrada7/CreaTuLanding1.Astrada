@@ -21,7 +21,6 @@ const ProductForm = () => {
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
-  // API key de ImgBB
   const IMGBB_API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
 
   const categories = [
@@ -41,7 +40,7 @@ const ProductForm = () => {
       setLoading(true);
       const docRef = doc(db, 'productos', id);
       const docSnap = await getDoc(docRef);
-      
+
       if (docSnap.exists()) {
         setProduct({
           name: docSnap.data().name || '',
@@ -72,21 +71,18 @@ const ProductForm = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Verificar tipo de archivo
       if (!file.type.startsWith('image/')) {
         alert('Por favor selecciona un archivo de imagen válido');
         return;
       }
-      
-      // Verificar tamaño (máximo 5MB para ImgBB)
+
       if (file.size > 5 * 1024 * 1024) {
         alert('La imagen debe ser menor a 5MB');
         return;
       }
-      
+
       setImageFile(file);
-      
-      // Crear preview local
+
       const reader = new FileReader();
       reader.onload = (e) => {
         setImagePreview(e.target.result);
@@ -100,17 +96,17 @@ const ProductForm = () => {
     try {
       const formData = new FormData();
       formData.append('image', file);
-      
+
       const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
         method: 'POST',
         body: formData
       });
-      
+
       const data = await response.json();
-      
+
       if (data.success) {
         setUploading(false);
-        return data.data.url; // URL pública de la imagen
+        return data.data.url;
       } else {
         throw new Error(data.error.message || 'Error al subir imagen');
       }
@@ -123,7 +119,7 @@ const ProductForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!product.name || !product.description || !product.price) {
       alert('Por favor completa todos los campos obligatorios');
       return;
@@ -136,13 +132,12 @@ const ProductForm = () => {
 
     try {
       setSaving(true);
-      
-      // Subir imagen si hay una nueva
+
       let imageURL = product.image;
       if (imageFile) {
         imageURL = await uploadToImgBB(imageFile);
       }
-      
+
       const productData = {
         name: product.name,
         description: product.description,
@@ -153,18 +148,16 @@ const ProductForm = () => {
       };
 
       if (id) {
-        // Actualizar producto existente
         await updateDoc(doc(db, 'productos', id), productData);
         alert('Producto actualizado correctamente');
       } else {
-        // Agregar nuevo producto
         await addDoc(collection(db, 'productos'), {
           ...productData,
-          id: Date.now() // ID temporal para compatibilidad
+          id: Date.now()
         });
         alert('Producto agregado correctamente');
       }
-      
+
       navigate('/admin/products');
     } catch (error) {
       console.error('Error al guardar producto:', error);
@@ -292,7 +285,7 @@ const ProductForm = () => {
                   <small className="form-text text-muted">
                     Máximo 5MB. Formatos: JPG, PNG, GIF, WebP
                   </small>
-                  
+
                   {uploading && (
                     <div className="uploading">
                       <p>Subiendo imagen a ImgBB...</p>
@@ -304,16 +297,16 @@ const ProductForm = () => {
                 {imagePreview && (
                   <div className="image-preview">
                     <label>Vista Previa:</label>
-                    <img 
-                      src={imagePreview} 
-                      alt="Vista previa" 
+                    <img
+                      src={imagePreview}
+                      alt="Vista previa"
                       className="preview-image"
                       onError={(e) => {
                         e.target.style.display = 'none';
                         e.target.nextSibling.style.display = 'block';
                       }}
                     />
-                    <div className="image-error" style={{display: 'none'}}>
+                    <div className="image-error" style={{ display: 'none' }}>
                       Error al cargar la imagen
                     </div>
                   </div>

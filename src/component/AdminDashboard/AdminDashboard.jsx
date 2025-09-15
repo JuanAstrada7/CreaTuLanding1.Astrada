@@ -18,7 +18,6 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        // Obtener productos
         const productsSnapshot = await getDocs(collection(db, 'productos'));
         const products = productsSnapshot.docs.map(doc => ({
           id: doc.id,
@@ -26,11 +25,9 @@ const AdminDashboard = () => {
         }));
         const totalProducts = products.length;
 
-        // Calcular estadísticas de stock
         const lowStockProducts = products.filter(p => p.stock <= 5 && p.stock > 0).length;
         const outOfStockProducts = products.filter(p => p.stock === 0).length;
 
-        // Obtener órdenes
         const ordersSnapshot = await getDocs(collection(db, 'orders'));
         const orders = ordersSnapshot.docs.map(doc => ({
           id: doc.id,
@@ -38,10 +35,10 @@ const AdminDashboard = () => {
         }));
 
         const totalOrders = orders.length;
-        const pendingOrders = orders.filter(order => 
+        const pendingOrders = orders.filter(order =>
           !order.status || order.status === 'pendiente'
         ).length;
-        
+
         const totalSales = orders.reduce((acc, order) => acc + (order.total || 0), 0);
 
         setStats({
@@ -76,26 +73,26 @@ const AdminDashboard = () => {
     <div className="admin-dashboard">
       <div className="container">
         <h1 className="dashboard-title">Panel de Administración</h1>
-        
+
         <div className="stats-grid">
           <div className="stat-card">
             <h3>Productos</h3>
             <p className="stat-number">{stats.totalProducts}</p>
             <Link to="/admin/products" className="btn btn-primary">Gestionar Productos</Link>
           </div>
-          
+
           <div className="stat-card">
             <h3>Órdenes Totales</h3>
             <p className="stat-number">{stats.totalOrders}</p>
             <Link to="/admin/orders" className="btn btn-primary">Ver Órdenes</Link>
           </div>
-          
+
           <div className="stat-card">
             <h3>Órdenes Pendientes</h3>
             <p className="stat-number">{stats.pendingOrders}</p>
             <Link to="/admin/orders" className="btn btn-warning">Gestionar</Link>
           </div>
-          
+
           <div className="stat-card">
             <h3>Ventas Totales</h3>
             <p className="stat-number">${stats.totalSales.toLocaleString()}</p>
@@ -103,7 +100,6 @@ const AdminDashboard = () => {
           </div>
         </div>
 
-        {/* Alertas de Stock */}
         {(stats.lowStockProducts > 0 || stats.outOfStockProducts > 0) && (
           <div className="stock-alerts">
             <h2>Alertas de Stock</h2>
@@ -118,7 +114,7 @@ const AdminDashboard = () => {
                   </Link>
                 </div>
               )}
-              
+
               {stats.outOfStockProducts > 0 && (
                 <div className="alert-card danger">
                   <h4>🚫 Sin Stock</h4>
@@ -140,12 +136,12 @@ const AdminDashboard = () => {
               <h4>➕ Agregar Producto</h4>
               <p>Crear un nuevo producto en el catálogo</p>
             </Link>
-            
+
             <Link to="/admin/orders" className="action-card">
               <h4>📋 Ver Órdenes</h4>
               <p>Revisar y gestionar pedidos</p>
             </Link>
-            
+
             <Link to="/admin/products" className="action-card">
               <h4>✏️ Editar Productos</h4>
               <p>Modificar productos existentes</p>

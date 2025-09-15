@@ -59,8 +59,8 @@ const PasswordReset = () => {
             />
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={loading}
             className="btn btn-primary w-100"
           >

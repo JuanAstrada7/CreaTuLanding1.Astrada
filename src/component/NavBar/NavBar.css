@@ -74,12 +74,12 @@
 }
 
 .btn-logout {
-  color: #ff6b6b;
-  border-color: #ff6b6b;
+    color: #ff6b6b;
+    border-color: #ff6b6b;
 }
 
 .btn-logout:hover {
-  background-color: #ff6b6b;
-  color: #fff;
-  border-color: #ff6b6b;
+    background-color: #ff6b6b;
+    color: #fff;
+    border-color: #ff6b6b;
 }

@@ -12,7 +12,6 @@ const Checkout = () => {
   const [form, setForm] = useState({ name: '', email: '', phone: '' });
   const [loading, setLoading] = useState(false);
 
-  // Pre-llenar formulario con datos del usuario si está autenticado
   useEffect(() => {
     if (user) {
       setForm({
@@ -32,12 +31,11 @@ const Checkout = () => {
     setLoading(true);
 
     try {
-      // Verificar stock antes de procesar
       for (const item of cart) {
         const productRef = doc(db, 'productos', item.id);
         const productSnap = await getDoc(productRef);
         const currentStock = productSnap.data().stock || 0;
-        
+
         if (currentStock < item.quantity) {
           alert(`Stock insuficiente para ${item.name}. Disponible: ${currentStock}`);
           setLoading(false);
@@ -45,7 +43,6 @@ const Checkout = () => {
         }
       }
 
-      // Crear la orden
       const order = {
         buyer: form,
         items: cart,
@@ -56,7 +53,6 @@ const Checkout = () => {
 
       const orderRef = await addDoc(collection(db, "orders"), order);
 
-      // Reducir stock después de crear la orden
       for (const item of cart) {
         const productRef = doc(db, 'productos', item.id);
         await updateDoc(productRef, {
@@ -90,7 +86,7 @@ const Checkout = () => {
     <div className="checkout-container">
       <div className="container">
         <h2>Finalizar Compra</h2>
-        
+
         <div className="checkout-content">
           <div className="order-summary">
             <h3>Resumen de tu orden</h3>
@@ -114,7 +110,7 @@ const Checkout = () => {
 
           <form onSubmit={handleSubmit} className="checkout-form">
             <h3>Información de contacto</h3>
-            
+
             <div className="form-group">
               <label htmlFor="name">Nombre completo *</label>
               <input
@@ -154,8 +150,8 @@ const Checkout = () => {
               />
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               disabled={loading || cart.length === 0}
               className="btn btn-primary btn-lg w-100"
             >

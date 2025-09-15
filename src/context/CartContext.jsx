@@ -10,14 +10,13 @@ const CartProvider = ({ children }) => {
     setCart(prevCart => {
       const existing = prevCart.find(item => item.id === product.id);
       if (existing) {
-        // Verificar que no exceda el stock disponible
         const newQuantity = existing.quantity + product.quantity;
         if (newQuantity > product.stock) {
           setNotification(`No hay suficiente stock. Máximo disponible: ${product.stock}`);
           setTimeout(() => setNotification(null), 3000);
           return prevCart;
         }
-        
+
         setNotification('¡Cantidad actualizada en el carrito!');
         return prevCart.map(item =>
           item.id === product.id
@@ -48,7 +47,6 @@ const CartProvider = ({ children }) => {
     setCart(prevCart =>
       prevCart.map(item => {
         if (item.id === id) {
-          // Verificar que no exceda el stock disponible
           if (item.quantity < item.stock) {
             return { ...item, quantity: item.quantity + 1 };
           } else {

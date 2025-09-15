@@ -41,69 +41,68 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/password-reset" element={<PasswordReset />} />
               <Route path="/contacto" element={<Contacto />} />
-              <Route 
-                path="/checkout" 
+              <Route
+                path="/checkout"
                 element={
                   <ProtectedRoute>
                     <Checkout />
                   </ProtectedRoute>
-                } 
+                }
               />
-              <Route 
-                path="/mis-ordenes" 
+              <Route
+                path="/mis-ordenes"
                 element={
                   <ProtectedRoute>
                     <OrderHistory />
                   </ProtectedRoute>
-                } 
+                }
               />
-              
-              {/* Rutas de Administración */}
-              <Route 
-                path="/admin" 
+
+              <Route
+                path="/admin"
                 element={
                   <ProtectedAdminRoute>
                     <AdminDashboard />
                   </ProtectedAdminRoute>
-                } 
+                }
               />
-              
-              <Route 
-                path="/admin/products" 
+
+              <Route
+                path="/admin/products"
                 element={
                   <ProtectedAdminRoute>
                     <ProductManagement />
                   </ProtectedAdminRoute>
-                } 
+                }
               />
-              
-              <Route 
-                path="/admin/products/new" 
+
+              <Route
+                path="/admin/products/new"
                 element={
                   <ProtectedAdminRoute>
                     <ProductForm />
                   </ProtectedAdminRoute>
-                } 
+                }
               />
-              
-              <Route 
-                path="/admin/products/edit/:id" 
+
+              <Route
+                path="/admin/products/edit/:id"
                 element={
                   <ProtectedAdminRoute>
                     <ProductForm />
                   </ProtectedAdminRoute>
-                } 
+                }
               />
-              
-              <Route 
-                path="/admin/orders" 
+
+              <Route
+                path="/admin/orders"
                 element={
                   <ProtectedAdminRoute>
                     <OrderManagement />
                   </ProtectedAdminRoute>
-                } 
+                }
               />
-              
+
               <Route path="*" element={<div>Página no encontrada</div>} />
             </Routes>
           </div>

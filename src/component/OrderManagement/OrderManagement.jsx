@@ -38,13 +38,13 @@ const OrderManagement = () => {
         status: newStatus,
         updatedAt: new Date()
       });
-      
-      setOrders(orders.map(order => 
-        order.id === orderId 
+
+      setOrders(orders.map(order =>
+        order.id === orderId
           ? { ...order, status: newStatus }
           : order
       ));
-      
+
       alert('Estado de orden actualizado correctamente');
     } catch (error) {
       console.error('Error al actualizar estado:', error);
@@ -156,9 +156,9 @@ const OrderManagement = () => {
                     <div className="items-list">
                       {order.items?.map((item, index) => (
                         <div key={index} className="item-row">
-                          <img 
-                            src={item.image} 
-                            alt={item.name} 
+                          <img
+                            src={item.image}
+                            alt={item.name}
                             className="item-thumbnail"
                           />
                           <div className="item-details">

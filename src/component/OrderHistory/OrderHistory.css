@@ -93,7 +93,8 @@
   color: #333;
 }
 
-.item-quantity, .item-price {
+.item-quantity,
+.item-price {
   margin: 0.25rem 0;
   font-size: 0.9rem;
   color: #6c757d;
@@ -118,7 +119,8 @@
   color: #333;
 }
 
-.loading-container, .error-container {
+.loading-container,
+.error-container {
   display: flex;
   justify-content: center;
   align-items: center;

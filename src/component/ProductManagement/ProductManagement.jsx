@@ -19,16 +19,16 @@ const ProductManagement = () => {
       console.log('=== CARGANDO PRODUCTOS ===');
       const querySnapshot = await getDocs(collection(db, 'productos'));
       const productsList = [];
-      
+
       querySnapshot.forEach((doc) => {
         console.log('Producto encontrado:', doc.id, doc.data());
         productsList.push({
-          id: doc.data().id || doc.id, // Usar el campo id interno o el ID del documento
-          documentId: doc.id, // Guardar el ID real del documento
+          id: doc.data().id || doc.id,
+          documentId: doc.id,
           ...doc.data()
         });
       });
-      
+
       console.log('Total de productos cargados:', productsList.length);
       setProducts(productsList);
       setError(null);
@@ -43,31 +43,25 @@ const ProductManagement = () => {
   const handleDelete = async (productId, productName) => {
     if (window.confirm(`¿Estás seguro de que quieres eliminar "${productName}"?`)) {
       try {
-        // Logs de depuración
         console.log('=== INICIANDO ELIMINACIÓN ===');
         console.log('ID original:', productId, 'Tipo:', typeof productId);
-        
-        // Buscar el producto en el estado para obtener el ID real del documento
+
         const productToDelete = products.find(p => p.id === productId);
         if (!productToDelete) {
           console.error('❌ Producto no encontrado en el estado local');
           alert('Error: Producto no encontrado');
           return;
         }
-        
-        // Usar el ID real del documento (no el campo id interno)
+
         const documentId = productToDelete.documentId || productToDelete.id;
         console.log('ID del documento a eliminar:', documentId);
-        
-        // Verificar que el documento existe antes de eliminar
+
         const docRef = doc(db, 'productos', documentId);
         console.log('Referencia del documento:', docRef.path);
-        
-        // Eliminar de Firestore
+
         await deleteDoc(docRef);
         console.log('✅ Producto eliminado de Firestore');
-        
-        // Verificar que realmente se eliminó
+
         try {
           const docSnapshot = await getDoc(docRef);
           if (docSnapshot.exists()) {
@@ -80,17 +74,16 @@ const ProductManagement = () => {
         } catch (verifyError) {
           console.log('✅ Documento eliminado (error al verificar es normal)');
         }
-        
-        // Actualizar estado local
+
         setProducts(prev => prev.filter(product => product.id !== productId));
         console.log('✅ Estado local actualizado');
-        
+
         alert('Producto eliminado correctamente');
       } catch (error) {
         console.error('❌ Error al eliminar producto:', error);
         console.error('Código de error:', error.code);
         console.error('Mensaje de error:', error.message);
-        
+
         if (error.code === 'permission-denied') {
           alert('Error: No tienes permisos para eliminar productos');
         } else if (error.code === 'not-found') {
@@ -163,9 +156,9 @@ const ProductManagement = () => {
                   return (
                     <tr key={product.id}>
                       <td>
-                        <img 
-                          src={product.image} 
-                          alt={product.name} 
+                        <img
+                          src={product.image}
+                          alt={product.name}
                           className="product-thumbnail"
                         />
                       </td>
@@ -184,7 +177,7 @@ const ProductManagement = () => {
                       </td>
                       <td>
                         <div className="action-buttons">
-                          <Link 
+                          <Link
                             to={`/admin/products/edit/${product.documentId}`}
                             className="btn btn-sm btn-primary"
                           >

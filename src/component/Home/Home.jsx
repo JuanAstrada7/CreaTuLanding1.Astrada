@@ -8,9 +8,9 @@ const Home = () => (
     <section className="home-bienvenida">
       <h1>¡Bienvenido a Caprichos Pastelería!</h1>
       <p>Descubre nuestras tortas, cupcakes y tartas artesanales. ¡Endulza tu día con nosotros!</p>
-      <img 
-        src={bienvenidaImg} 
-        alt="Bienvenida Caprichos Pastelería" 
+      <img
+        src={bienvenidaImg}
+        alt="Bienvenida Caprichos Pastelería"
         className="home-img"
       />
       <Link to="/productos" className="home-btn-productos">
@@ -28,8 +28,8 @@ const Home = () => (
     <section className="home-nosotros">
       <h2>Sobre nosotros</h2>
       <p>
-        Somos una pastelería familiar dedicada a crear momentos dulces y especiales. 
-        Desde 2010, elaboramos productos artesanales con ingredientes de calidad y mucho amor. 
+        Somos una pastelería familiar dedicada a crear momentos dulces y especiales.
+        Desde 2010, elaboramos productos artesanales con ingredientes de calidad y mucho amor.
         Nuestro compromiso es ofrecerte sabores únicos y una atención personalizada. ¡Gracias por confiar en nosotros!
       </p>
     </section>
