@@ -21,6 +21,8 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <h2>Carrito de compras</h2>
+      
+      {/* Tabla para desktop */}
       <table className="table">
         <thead>
           <tr>
@@ -51,9 +53,39 @@ const Cart = () => {
           ))}
         </tbody>
       </table>
+      
+      {/* Cards para mobile */}
+      <div className="cart-mobile-cards">
+        {cart.map(item => (
+          <div key={item.id} className="cart-item-card">
+            <div className="cart-item-name">{item.name}</div>
+            <div className="cart-item-details">
+              <div className="cart-item-detail">
+                <strong>Precio:</strong> ${item.price}
+              </div>
+              <div className="cart-item-detail">
+                <strong>Subtotal:</strong> ${item.price * item.quantity}
+              </div>
+            </div>
+            <div className="cart-quantity-controls">
+              <button className="btn btn-light btn-sm" onClick={() => decreaseQuantity(item.id)} disabled={item.quantity <= 1}>-</button>
+              <span className="cart-quantity-display">{item.quantity}</span>
+              <button className="btn btn-light btn-sm" onClick={() => increaseQuantity(item.id)}>+</button>
+            </div>
+            <div className="cart-item-actions">
+              <button className="btn btn-danger btn-sm" onClick={() => removeFromCart(item.id)}>
+                Eliminar
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+      
       <h4>Total: ${total}</h4>
-      <button className="btn btn-secondary" onClick={clearCart}>Vaciar carrito</button>
-      <Link to="/checkout" className="btn btn-success ms-2">Finalizar compra</Link>
+      <div className="cart-footer-buttons">
+        <button className="btn btn-secondary" onClick={clearCart}>Vaciar carrito</button>
+        <Link to="/checkout" className="btn btn-success">Finalizar compra</Link>
+      </div>
     </div>
   );
 };

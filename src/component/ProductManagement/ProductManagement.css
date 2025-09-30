@@ -122,17 +122,83 @@
   opacity: 0.8;
 }
 
+/* Responsive Design Mejorado */
 @media (max-width: 768px) {
+  .product-management {
+    padding: 1rem 0;
+  }
+  
   .header-actions {
     flex-direction: column;
     align-items: stretch;
+    text-align: center;
   }
-
+  
+  .header-actions h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Hacer tabla más pequeña en tablet */
   .table-responsive {
-    font-size: 0.875rem;
+    font-size: 0.75rem;
   }
-
+  
+  .product-thumbnail {
+    width: 40px;
+    height: 40px;
+  }
+  
   .action-buttons {
     flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .action-buttons .btn {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.4rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .product-management {
+    padding: 0.5rem 0;
+  }
+  
+  .header-actions h1 {
+    font-size: 1.25rem;
+  }
+  
+  /* En móvil, ocultar algunas columnas y hacer scroll horizontal */
+  .products-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .table {
+    min-width: 600px;
+    font-size: 0.7rem;
+  }
+  
+  .table th,
+  .table td {
+    padding: 0.25rem;
+    white-space: nowrap;
+  }
+  
+  .product-thumbnail {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .action-buttons .btn {
+    font-size: 0.6rem;
+    padding: 0.1rem 0.3rem;
+  }
+  
+  /* Ocultar columna de imagen en móvil muy pequeño */
+  .table th:first-child,
+  .table td:first-child {
+    display: none;
   }
 }

@@ -38,6 +38,56 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 1rem;
+  min-height: 44px; /* Tamaño mínimo para touch */
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 1rem;
+    min-height: 70vh;
+  }
+  
+  .login-card {
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  
+  .login-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .form-control {
+    padding: 0.875rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .login-container {
+    padding: 0.5rem;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+  
+  .login-card {
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-card h2 {
+    font-size: 1.25rem;
+  }
+  
+  .form-control {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+}
 }
 
 .form-control:focus {
