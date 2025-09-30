@@ -44,7 +44,7 @@
 
 .order-header h4 {
   margin: 0 0 0.5rem 0;
-  color: #007bff;
+  color: #ff6b6b;
   font-weight: 600;
 }
 
@@ -125,6 +125,46 @@
   justify-content: center;
   align-items: center;
   min-height: 400px;
+}
+
+/* Estilos para estados de órdenes */
+.order-status .badge {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge.bg-warning {
+  background-color: #ffc107 !important;
+  color: #000 !important;
+}
+
+.badge.bg-info {
+  background-color: #17a2b8 !important;
+  color: #fff !important;
+}
+
+.badge.bg-primary {
+  background-color: #e74c3c !important;
+  color: #fff !important;
+}
+
+.badge.bg-success {
+  background-color: #28a745 !important;
+  color: #fff !important;
+}
+
+.badge.bg-danger {
+  background-color: #dc3545 !important;
+  color: #fff !important;
+}
+
+.badge.bg-secondary {
+  background-color: #6c757d !important;
+  color: #fff !important;
 }
 
 .error-container .alert {

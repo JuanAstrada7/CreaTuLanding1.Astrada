@@ -40,7 +40,7 @@
 .stat-number {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #007bff;
+  color:#e74c3c;
   margin-bottom: 1rem;
 }
 
@@ -123,7 +123,7 @@
 }
 
 .action-card:hover {
-  border-color: #007bff;
+  border-color: #e74c3c;
   background-color: #f8f9fa;
   text-decoration: none;
   color: inherit;
@@ -131,7 +131,7 @@
 
 .action-card h4 {
   margin-bottom: 0.5rem;
-  color: #007bff;
+  color:#e74c3c;
 }
 
 .action-card p {

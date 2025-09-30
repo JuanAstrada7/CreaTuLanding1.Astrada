@@ -3,6 +3,29 @@ import { useAuth } from '../../context/AuthContext';
 import { getUserOrders } from '../Services/firebaseService';
 import './OrderHistory.css';
 
+// Funciones para manejar estados
+const getStatusColor = (status) => {
+  switch (status) {
+    case 'pendiente': return 'warning';
+    case 'en_preparacion': return 'info';
+    case 'enviado': return 'primary';
+    case 'entregado': return 'success';
+    case 'cancelado': return 'danger';
+    default: return 'secondary';
+  }
+};
+
+const getStatusLabel = (status) => {
+  switch (status) {
+    case 'pendiente': return 'Pendiente';
+    case 'en_preparacion': return 'En Preparación';
+    case 'enviado': return 'Enviado';
+    case 'entregado': return 'Entregado';
+    case 'cancelado': return 'Cancelado';
+    default: return 'Pendiente';
+  }
+};
+
 const OrderHistory = () => {
   const { user } = useAuth();
   const [orders, setOrders] = useState([]);
@@ -81,7 +104,9 @@ const OrderHistory = () => {
                   </span>
                 </div>
                 <div className="order-status">
-                  <span className="badge bg-success">Completada</span>
+                  <span className={`badge bg-${getStatusColor(order.status || 'pendiente')}`}>
+                    {getStatusLabel(order.status || 'pendiente')}
+                  </span>
                 </div>
               </div>
 

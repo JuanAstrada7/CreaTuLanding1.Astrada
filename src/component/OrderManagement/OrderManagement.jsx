@@ -32,20 +32,45 @@ const OrderManagement = () => {
     }
   };
 
-  const handleStatusChange = async (orderId, newStatus) => {
+  const handleStatusChange = async (orderId, newStatus, oldStatus) => {
     try {
+      // Confirmación para estados críticos
+      if (newStatus === 'cancelado' && oldStatus !== 'cancelado') {
+        const confirmCancel = window.confirm('¿Estás seguro de que quieres cancelar esta orden?');
+        if (!confirmCancel) return;
+      }
+      
+      if (newStatus === 'entregado' && oldStatus !== 'entregado') {
+        const confirmDeliver = window.confirm('¿Confirmas que esta orden ha sido entregada?');
+        if (!confirmDeliver) return;
+      }
+
       await updateDoc(doc(db, 'orders', orderId), {
         status: newStatus,
-        updatedAt: new Date()
+        updatedAt: new Date(),
+        statusHistory: [{
+          status: newStatus,
+          timestamp: new Date(),
+          previousStatus: oldStatus
+        }]
       });
 
       setOrders(orders.map(order =>
         order.id === orderId
-          ? { ...order, status: newStatus }
+          ? { ...order, status: newStatus, updatedAt: new Date() }
           : order
       ));
 
-      alert('Estado de orden actualizado correctamente');
+      // Mensajes específicos por estado
+      const messages = {
+        'pendiente': 'Orden marcada como pendiente',
+        'en_preparacion': 'Orden en preparación',
+        'enviado': 'Orden marcada como enviada',
+        'entregado': 'Orden marcada como entregada',
+        'cancelado': 'Orden cancelada'
+      };
+
+      alert(messages[newStatus] || 'Estado actualizado correctamente');
     } catch (error) {
       console.error('Error al actualizar estado:', error);
       alert('Error al actualizar el estado de la orden');
@@ -131,7 +156,7 @@ const OrderManagement = () => {
                   <div className="order-status">
                     <select
                       value={order.status || 'pendiente'}
-                      onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                      onChange={(e) => handleStatusChange(order.id, e.target.value, order.status)}
                       className={`form-select form-select-sm status-select status-${getStatusColor(order.status || 'pendiente')}`}
                     >
                       <option value="pendiente">Pendiente</option>

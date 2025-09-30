@@ -48,7 +48,10 @@ const Checkout = () => {
         items: cart,
         date: Timestamp.fromDate(new Date()),
         total: cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
-        userId: user?.uid || null
+        userId: user?.uid || null,
+        status: 'pendiente', // Estado inicial
+        createdAt: Timestamp.fromDate(new Date()),
+        updatedAt: Timestamp.fromDate(new Date())
       };
 
       const orderRef = await addDoc(collection(db, "orders"), order);
