@@ -189,128 +189,45 @@ const ProductForm = () => {
 
         <div className="form-card">
           <form id="product-form" onSubmit={handleSubmit}>
-            {/* Sección 1: Información Básica */}
-            <div className="form-section">
-              <h3 className="section-title">Información Básica</h3>
-              
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="name">Nombre del Producto *</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={product.name}
-                      onChange={handleChange}
-                      className="form-control"
-                      autoComplete="on"
-                      required
-                      placeholder="Ej: Torta de Chocolate"
+            <div className="product-layout">
+              {/* Sección de Imagen (Izquierda) */}
+              <div className="image-section">
+                <div className="image-upload-area">
+                  {imagePreview ? (
+                    <img
+                      src={imagePreview}
+                      alt="Vista previa del producto"
+                      className="product-image-preview"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
+                      }}
                     />
-                  </div>
-                </div>
-
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="category">Categoría *</label>
-                    <select
-                      id="category"
-                      name="category"
-                      value={product.category}
-                      onChange={handleChange}
-                      className="form-control"
-                      autoComplete="on"
-                    >
-                      {categories.map(cat => (
-                        <option key={cat.value} value={cat.value}>
-                          {cat.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="description">Descripción *</label>
-                <textarea
-                  id="description"
-                  name="description"
-                  value={product.description}
-                  onChange={handleChange}
-                  className="form-control"
-                  rows="4"
-                  autoComplete="on"
-                  required
-                  placeholder="Describe el producto, ingredientes especiales, sabores, etc."
-                />
-              </div>
-            </div>
-
-            {/* Sección 2: Precio y Disponibilidad */}
-            <div className="form-section">
-              <h3 className="section-title">Precio y Disponibilidad</h3>
-              
-              <div className="row">
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="price">Precio *</label>
-                    <div className="input-group">
-                      <span className="input-group-text">$</span>
-                      <input
-                        type="number"
-                        id="price"
-                        name="price"
-                        value={product.price}
-                        onChange={handleChange}
-                        className="form-control"
-                        min="0"
-                        step="0.01"
-                        autoComplete="on"
-                        required
-                        placeholder="0.00"
-                      />
+                  ) : (
+                    <div className="image-placeholder">
+                      <div className="camera-icon">📷</div>
+                      <p>Imagen del producto</p>
                     </div>
-                  </div>
+                  )}
                 </div>
-
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <label htmlFor="stock">Existencias disponibles</label>
-                    <input
-                      type="number"
-                      id="stock"
-                      name="stock"
-                      value={product.stock}
-                      onChange={handleChange}
-                      className="form-control"
-                      min="0"
-                      autoComplete="on"
-                      placeholder="Cantidad disponible"
-                    />
-                  </div>
+                
+                <div className="image-upload-button">
+                  <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="image-input"
+                    style={{ display: 'none' }}
+                  />
+                  <label htmlFor="image" className="upload-btn">
+                    Seleccionar imagen
+                  </label>
+                  <small className="upload-help">
+                    Máximo 5MB. JPG, PNG, GIF, WebP
+                  </small>
                 </div>
-              </div>
-            </div>
-
-            {/* Sección 3: Imagen del Producto */}
-            <div className="form-section">
-              <h3 className="section-title">Imagen del Producto</h3>
-              
-              <div className="form-group">
-                <label htmlFor="image">Seleccionar imagen *</label>
-                <input
-                  type="file"
-                  id="image"
-                  name="image"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className="form-control"
-                />
-                <small className="form-text text-muted">
-                  Máximo 5MB. Formatos soportados: JPG, PNG, GIF, WebP
-                </small>
 
                 {uploading && (
                   <div className="uploading">
@@ -320,46 +237,115 @@ const ProductForm = () => {
                 )}
               </div>
 
-              {imagePreview && (
-                <div className="image-preview">
-                  <label>Vista previa:</label>
-                  <img
-                    src={imagePreview}
-                    alt="Vista previa del producto"
-                    className="preview-image"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'block';
-                    }}
+              {/* Sección de Información (Derecha) */}
+              <div className="info-section">
+                {/* Información Básica */}
+                <div className="form-group">
+                  <label htmlFor="name">*Nombre del producto:</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={product.name}
+                    onChange={handleChange}
+                    className="form-control"
+                    autoComplete="on"
+                    required
+                    placeholder="Ej: Torta de Chocolate"
                   />
-                  <div className="image-error" style={{ display: 'none' }}>
-                    Error al cargar la imagen
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="category">*Categoría:</label>
+                  <select
+                    id="category"
+                    name="category"
+                    value={product.category}
+                    onChange={handleChange}
+                    className="form-control select-field"
+                    autoComplete="on"
+                  >
+                    {categories.map(cat => (
+                      <option key={cat.value} value={cat.value}>
+                        {cat.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="description">*Descripción:</label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    value={product.description}
+                    onChange={handleChange}
+                    className="form-control"
+                    rows="4"
+                    autoComplete="on"
+                    required
+                    placeholder="Describe el producto, ingredientes especiales, sabores, etc."
+                  />
+                </div>
+
+                {/* Precio y Stock */}
+                <div className="price-stock-section">
+                  <h4 className="subsection-title">PRECIO Y STOCK</h4>
+                  
+                  <div className="price-stock-row">
+                    <div className="price-group">
+                      <label htmlFor="price">*Precio:</label>
+                      <div className="input-group">
+                        <span className="input-group-text">$</span>
+                        <input
+                          type="number"
+                          id="price"
+                          name="price"
+                          value={product.price}
+                          onChange={handleChange}
+                          className="form-control"
+                          min="0"
+                          step="0.01"
+                          autoComplete="on"
+                          required
+                          placeholder="0.00"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="stock-group">
+                      <label htmlFor="stock">*Existencias:</label>
+                      <input
+                        type="number"
+                        id="stock"
+                        name="stock"
+                        value={product.stock}
+                        onChange={handleChange}
+                        className="form-control"
+                        min="0"
+                        autoComplete="on"
+                        placeholder="Cantidad"
+                      />
+                    </div>
                   </div>
                 </div>
-              )}
+
+                {/* Botón de Guardar */}
+                <div className="save-button-container">
+                  <button
+                    type="submit"
+                    className="btn-save"
+                    disabled={saving || uploading}
+                  >
+                    {saving ? 'GUARDANDO...' : uploading ? 'SUBIENDO IMAGEN...' : 'GUARDAR PRODUCTO'}
+                  </button>
+                </div>
+              </div>
             </div>
           </form>
         </div>
 
-        {/* Botones fuera del formulario para mejor layout */}
-        <div className="form-actions">
-          <button
-            type="button"
-            onClick={() => navigate('/admin/products')}
-            className="btn btn-secondary"
-            disabled={saving || uploading}
-          >
-            Cancelar
-          </button>
-          <button
-            type="submit"
-            form="product-form"
-            className="btn btn-primary"
-            disabled={saving || uploading}
-          >
-            {saving ? 'Guardando...' : uploading ? 'Subiendo imagen...' : (id ? 'Actualizar Producto' : 'Agregar Producto')}
-          </button>
-        </div>
+
       </div>
     </div>
   );
