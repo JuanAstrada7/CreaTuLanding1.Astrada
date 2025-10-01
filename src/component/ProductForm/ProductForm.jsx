@@ -292,7 +292,7 @@ const ProductForm = () => {
                 <div className="price-stock-section">
                   <h4 className="subsection-title">PRECIO Y STOCK</h4>
                   
-                  <div className="price-stock-row">
+                  <div className="price-stock-column">
                     <div className="price-group">
                       <label htmlFor="price">*Precio:</label>
                       <div className="input-group">
