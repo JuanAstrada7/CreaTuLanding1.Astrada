@@ -1,121 +1,169 @@
+/* Resetear estilos de Bootstrap específicamente para ProductForm */
+.product-form-container * {
+  box-sizing: border-box;
+}
+
 .product-form-container {
-  padding: 2rem 0;
-  min-height: 100vh;
-  background-color: #f8f9fa;
+  padding: 2rem 0 4rem 0 !important;
+  min-height: calc(100vh - 200px) !important;
+  background-color: #f8f9fa !important;
 }
 
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 1rem;
+.product-form-container .container {
+  max-width: 900px !important;
+  margin: 0 auto !important;
+  padding: 0 1rem !important;
 }
 
-.form-header {
-  text-align: center;
-  margin-bottom: 3rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 2px solid #f1f3f4;
+/* Sobrescribir estilos de Bootstrap para form-header */
+.product-form-container .form-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 2rem !important;
+  flex-wrap: wrap !important;
+  gap: 1rem !important;
+  width: 100% !important;
 }
 
-.form-header h1 {
-  margin: 0;
-  color: #333;
-  font-weight: 600;
-  font-size: 2rem;
+.product-form-container .form-header h1 {
+  margin: 0 !important;
+  color: #333 !important;
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
 }
 
-.form-card {
-  background: white;
-  padding: 3rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e9ecef;
+/* Secciones del formulario estilo registro - Sobrescribir Bootstrap */
+.product-form-container .form-section {
+  margin-bottom: 2rem !important;
+  padding: 2.5rem !important;
+  background: #fafbfc !important;
+  border-radius: 12px !important;
+  border: 1px solid #e9ecef !important;
+  width: 100% !important;
 }
 
-/* Mejorar la distribución de columnas */
-.row {
-  margin: 0 -15px;
+.product-form-container .form-section:last-of-type {
+  margin-bottom: 2rem !important;
 }
 
-.col-md-6 {
-  padding: 0 15px;
+/* Sobrescribir estilos de Bootstrap para section-title */
+.product-form-container .section-title {
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+  color: #2c3e50 !important;
+  margin-bottom: 1.5rem !important;
+  padding-bottom: 0.75rem !important;
+  border-bottom: 3px solid #ff6b6b !important;
+  position: relative !important;
+  line-height: 1.2 !important;
 }
 
-.form-group {
-  margin-bottom: 2rem;
+.product-form-container .section-title::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -3px !important;
+  left: 0 !important;
+  width: 60px !important;
+  height: 3px !important;
+  background: linear-gradient(90deg, #ff6b6b, #ff8e8e) !important;
+  border-radius: 2px !important;
 }
 
-.form-group label {
-  font-weight: 600;
-  color: #495057;
-  margin-bottom: 0.75rem;
-  display: block;
-  font-size: 0.95rem;
+.product-form-container .form-card {
+  background: white !important;
+  padding: 2rem !important;
+  border-radius: 15px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid #e9ecef !important;
+  width: 100% !important;
+  max-width: none !important;
 }
 
-.form-control {
-  width: 100%;
-  border: 2px solid #e9ecef;
-  border-radius: 10px;
-  padding: 1rem;
-  font-size: 1rem;
-  transition: all 0.2s ease;
-  background-color: #fafafa;
+/* Sobrescribir Bootstrap Grid System */
+.product-form-container .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0 !important;
 }
 
-.form-control:focus {
-  border-color: #ff6b6b;
-  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.15);
-  outline: none;
-  background-color: #fff;
+.product-form-container .col-md-6 {
+  flex: 0 0 50% !important;
+  max-width: 50% !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
 }
 
-.form-control:hover {
-  border-color: #ddd;
-  background-color: #fff;
+/* En pantallas medianas y pequeñas, hacer una columna */
+@media (max-width: 992px) {
+  .product-form-container .col-md-6 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }
 
-/* Estilos específicos para textarea */
-textarea.form-control {
-  resize: vertical;
-  min-height: 120px;
-  font-family: inherit;
-  line-height: 1.5;
+/* Sobrescribir estilos de Bootstrap para form-group y form-control */
+.product-form-container .form-group {
+  margin-bottom: 2rem !important;
+  width: 100% !important;
 }
 
-/* Estilos específicos para select */
-select.form-control {
-  cursor: pointer;
+.product-form-container .form-group label {
+  font-weight: 600 !important;
+  color: #495057 !important;
+  margin-bottom: 0.75rem !important;
+  display: block !important;
+  font-size: 1.1rem !important;
 }
 
-.input-group {
-  display: flex;
+.product-form-container .form-control {
+  border: 2px solid #e9ecef !important;
+  border-radius: 8px !important;
+  padding: 1rem !important;
+  transition: border-color 0.2s !important;
+  width: 100% !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  background-color: white !important;
 }
 
-.input-group-text {
-  background-color: #f8f9fa;
-  border: 2px solid #e9ecef;
-  border-right: none;
-  color: #495057;
-  font-weight: 600;
-  padding: 1rem;
-  border-radius: 10px 0 0 10px;
-  font-size: 1rem;
+.product-form-container .form-control:focus {
+  border-color: #ff6b6b !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.25) !important;
+  outline: none !important;
 }
 
-.input-group .form-control {
-  border-left: none;
-  border-radius: 0 10px 10px 0;
-  background-color: #fafafa;
+/* Sobrescribir estilos de Bootstrap para input-group */
+.product-form-container .input-group-text {
+  background-color: #ff6b6b !important;
+  border: 2px solid #ff6b6b !important;
+  border-right: none !important;
+  color: white !important;
+  font-weight: 600 !important;
+  border-radius: 8px 0 0 8px !important;
 }
 
-.input-group .form-control:focus {
-  background-color: #fff;
+.product-form-container .input-group .form-control {
+  border-left: none !important;
+  border-radius: 0 8px 8px 0 !important;
+}
+
+.product-form-container .input-group {
+  width: 100% !important;
 }
 
 .image-preview {
   margin-top: 1.5rem;
   text-align: center;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px dashed #dee2e6;
 }
 
 .image-preview label {
@@ -127,30 +175,17 @@ select.form-control {
 
 .preview-image {
   width: 100%;
-  max-width: 350px;
-  height: 220px;
+  max-width: 300px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 15px;
-  border: 3px solid #e9ecef;
-  margin-top: 0.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+  border-radius: 12px;
+  border: 3px solid #ff6b6b;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
 }
 
 .preview-image:hover {
   transform: scale(1.02);
-}
-
-/* Estilos para el input de archivo */
-.form-control[type="file"] {
-  padding: 0.75rem;
-  height: auto;
-}
-
-.form-text {
-  font-size: 0.85rem;
-  color: #6c757d;
-  margin-top: 0.5rem;
 }
 
 .image-error {
@@ -162,36 +197,19 @@ select.form-control {
 .uploading {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 1rem;
-  padding: 1rem;
-  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-  border-radius: 12px;
-  color: #495057;
+  gap: 10px;
+  margin-top: 10px;
+  color: #666;
   font-size: 0.875rem;
-  font-weight: 600;
-  border: 2px solid #dee2e6;
 }
 
 .spinner {
   width: 20px;
   height: 20px;
-  border: 3px solid #e9ecef;
-  border-top: 3px solid #ff6b6b;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #3498db;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-}
-
-.image-error {
-  color: #dc3545;
-  font-size: 0.875rem;
-  margin-top: 1rem;
-  padding: 0.75rem;
-  background: #f8d7da;
-  border: 1px solid #f5c6cb;
-  border-radius: 8px;
-  text-align: center;
 }
 
 @keyframes spin {
@@ -204,154 +222,134 @@ select.form-control {
   }
 }
 
-.form-actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  margin-top: 3rem;
-  padding: 2.5rem;
-  background: #fff;
-  border-top: 3px solid #e9ecef;
-  border-radius: 0 0 15px 15px;
+/* Sobrescribir estilos de Bootstrap para form-actions */
+.product-form-container .form-actions {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 1.5rem !important;
+  margin-top: 1.5rem !important;
+  padding: 2rem !important;
+  border: 2px solid #e9ecef !important;
+  background: #f8f9fa !important;
+  border-radius: 15px !important;
+  width: 100% !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
 }
 
-.form-actions .btn {
-  flex: 0 0 auto;
-  min-width: 140px;
+.product-form-container .form-actions .btn {
+  padding: 0.875rem 2rem !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  min-width: 140px !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
-.btn {
-  padding: 0.875rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
+/* Sobrescribir estilos de Bootstrap para botones */
+.product-form-container .btn-primary {
+  background-color: #ff6b6b !important;
+  color: white !important;
+  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3) !important;
+  border-color: #ff6b6b !important;
 }
 
-.btn-secondary {
-  background-color: #6c757d;
-  color: white;
-  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.2);
+.product-form-container .btn-primary:hover:not(:disabled) {
+  background-color: #ff5252 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4) !important;
+  border-color: #ff5252 !important;
+  color: white !important;
 }
 
-.btn-secondary:hover {
-  background-color: #545b62;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+.product-form-container .btn-secondary {
+  background-color: #6c757d !important;
+  color: white !important;
+  box-shadow: 0 2px 8px rgba(108, 117, 125, 0.3) !important;
+  border-color: #6c757d !important;
 }
 
-.btn-primary {
-  background-color: #ff6b6b;
-  color: white;
-  box-shadow: 0 2px 8px rgba(255, 107, 107, 0.2);
+.product-form-container .btn-secondary:hover:not(:disabled) {
+  background-color: #545b62 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.4) !important;
+  border-color: #545b62 !important;
+  color: white !important;
 }
 
-.btn-primary:hover {
-  background-color: #ff5252;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+.product-form-container .btn:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
 }
 
-.btn:disabled {
-  background-color: #e9ecef;
-  color: #6c757d;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
-/* Separadores visuales */
-.form-section {
-  margin-bottom: 3rem;
-  padding: 2rem;
-  background: #fafbfc;
-  border-radius: 12px;
-  border: 1px solid #e9ecef;
-}
-
-.form-section:last-child {
-  margin-bottom: 2rem;
-}
-
-.section-title {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #495057;
-  margin-bottom: 2rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 3px solid #ff6b6b;
-  display: block;
-  text-align: left;
-}
-
-/* Responsive Design */
+/* Responsive Design Mejorado */
 @media (max-width: 768px) {
   .product-form-container {
     padding: 1rem 0;
   }
   
-  .container {
-    padding: 0 1rem;
+  .form-header {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
   }
   
-  .form-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-  }
-
   .form-header h1 {
     font-size: 1.5rem;
-  }  .form-card {
-    padding: 2rem;
-    border-radius: 12px;
+    margin-bottom: 1rem;
   }
   
-  .row {
-    margin: 0;
+  .form-section {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
   }
-  
-  .col-md-6 {
+
+  .section-title {
+    font-size: 1.2rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-header-item {
     padding: 0;
+  }
+
+  .section-header-item h3 {
+    font-size: 1rem;
+  }
+
+  .form-card {
+    padding: 1.5rem;
+    margin: 0 1rem;
   }
   
   .form-control {
-    min-height: 48px;
+    min-height: 44px;
     font-size: 1rem;
-    padding: 1rem;
   }
   
   .form-actions {
     flex-direction: column;
     gap: 1rem;
-    margin-top: 2rem;
+    padding: 1.5rem;
   }
 
   .form-actions .btn {
     width: 100%;
     min-height: 48px;
-    padding: 1rem 2rem;
-  }
-
-  .form-actions .btn:first-child {
-    margin-right: 0;
-    order: 1;
-  }
-
-  .form-actions .btn:not(:first-child) {
-    margin-left: 0;
+    padding: 1rem;
+    font-size: 1rem;
   }
   
-  .preview-image {
-    max-width: 280px;
-    height: 200px;
+  .image-preview {
+    max-width: 200px;
+    margin: 1rem auto;
   }
 }
 
@@ -360,51 +358,50 @@ select.form-control {
     padding: 0.5rem 0;
   }
   
-  .container {
-    padding: 0 0.5rem;
-  }
-  
   .form-header h1 {
     font-size: 1.25rem;
   }
   
+  .form-section {
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-header-item h3 {
+    font-size: 0.95rem;
+  }
+
   .form-card {
-    padding: 1.5rem;
-    border-radius: 10px;
+    padding: 1rem;
+    margin: 0 0.5rem;
   }
   
-.form-group {
-  margin-bottom: 2rem;
-}  .form-control {
-    padding: 0.875rem;
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+  
+  .form-control {
+    padding: 1rem;
     border-radius: 8px;
-    font-size: 1rem;
-  }
-  
-  .input-group-text {
-    padding: 0.875rem;
   }
   
   .form-group label {
     font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
   }
   
-  .section-title {
-    font-size: 1rem;
-  }
-  
-  .preview-image {
-    max-width: 100%;
-    height: 180px;
-  }
-  
-  .form-actions {
-    padding-top: 2rem;
+  .image-preview {
+    max-width: 150px;
   }
   
   .form-actions .btn {
-    padding: 0.875rem 1.5rem;
+    padding: 1rem;
     font-size: 0.95rem;
+    min-width: auto;
   }
 }
