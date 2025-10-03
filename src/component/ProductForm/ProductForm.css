@@ -107,7 +107,7 @@
 
 .upload-btn {
   display: inline-block;
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
@@ -116,12 +116,15 @@
   transition: all 0.3s ease;
   border: none;
   text-decoration: none;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .upload-btn:hover {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  background: linear-gradient(135deg, #ee5a52 0%, #dc3545 100%);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
 }
 
 .upload-help {
@@ -144,31 +147,42 @@
 
 .form-group label {
   display: block;
+  color: #374151;
   font-weight: 600;
-  color: #1e293b;
-  margin-bottom: 0.5rem;
   font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .form-control {
   width: 100%;
-  padding: 0.875rem;
+  padding: 1rem 1.25rem;
   font-size: 1rem;
   border: 2px solid #e2e8f0;
   border-radius: 8px;
   background-color: #ffffff;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  color: #1e293b;
+  min-height: 50px;
+  font-weight: 400;
+}
+
+.form-control::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
 }
 
 .form-control:focus {
-  border-color: #3b82f6;
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25), 0 2px 8px rgba(0, 0, 0, 0.1);
+  outline: none;
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+  background: #ffffff;
+  transform: translateY(-1px);
 }
 
-.form-control:hover {
-  border-color: #94a3b8;
+.form-control:hover:not(:focus) {
+  border-color: #cbd5e1;
 }
 
 .select-field {
@@ -250,30 +264,37 @@ textarea.form-control {
 }
 
 .btn-save {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
   color: white;
   border: none;
   padding: 1rem 3rem;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
+  min-height: 50px;
 }
 
 .btn-save:hover:not(:disabled) {
-  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  background: linear-gradient(135deg, #ee5a52 0%, #dc3545 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+}
+
+.btn-save:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(255, 107, 107, 0.2);
 }
 
 .btn-save:disabled {
-  opacity: 0.6;
+  background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
   cursor: not-allowed;
   transform: none;
+  box-shadow: 0 2px 8px rgba(156, 163, 175, 0.2);
 }
 
 .uploading {
@@ -295,6 +316,19 @@ textarea.form-control {
   height: 20px;
   border: 2px solid #fbbf24;
   border-top: 2px solid #92400e;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* Loading animation para botón guardar */
+.btn-save:disabled::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+  border: 2px solid transparent;
+  border-top: 2px solid #ffffff;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -334,20 +368,23 @@ textarea.form-control {
 @media (max-width: 768px) {
   .product-form-container {
     padding: 1rem 0;
+    min-height: calc(100vh - 150px);
   }
   
   .form-header {
     flex-direction: column;
     gap: 1rem;
     text-align: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem 0;
   }
   
   .form-header h1 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
   
   .form-card {
-    padding: 1.5rem;
+    padding: 2rem;
     border-radius: 12px;
   }
   
@@ -363,19 +400,36 @@ textarea.form-control {
     gap: 1rem;
   }
   
+  .form-control {
+    padding: 0.875rem 1rem;
+  }
+  
   .btn-save {
     width: 100%;
-    padding: 1rem;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
+  .product-form-container {
+    padding: 0.5rem 0;
+    background: #f8f9fa;
+  }
+  
   .container {
-    padding: 0 0.75rem;
+    padding: 0 0.5rem;
   }
   
   .form-card {
-    padding: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+  }
+  
+  .form-header h1 {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
   }
   
   .camera-icon {
@@ -384,5 +438,69 @@ textarea.form-control {
   
   .upload-btn {
     width: 100%;
+    padding: 1rem;
+    font-size: 0.85rem;
   }
+  
+  .form-control {
+    padding: 1rem;
+    border-radius: 6px;
+  }
+  
+  .btn-save {
+    padding: 1rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+  
+  .info-section {
+    gap: 1.25rem;
+  }
+  
+  .price-stock-section {
+    padding: 1.5rem;
+  }
+}
+
+/* Estados adicionales para mejor UX */
+.form-group.has-error .form-control {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.form-group.has-success .form-control {
+  border-color: #28a745;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+/* Animación de entrada */
+.form-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Focus visible para accesibilidad */
+.form-control:focus-visible {
+  outline: 2px solid #ff6b6b;
+  outline-offset: 2px;
+}
+
+.btn-save:focus-visible {
+  outline: 2px solid #ff6b6b;
+  outline-offset: 2px;
+}
+
+.upload-btn:focus-visible {
+  outline: 2px solid #ff6b6b;
+  outline-offset: 2px;
 }
