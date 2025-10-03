@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { resetPassword } from '../Services/firebaseService';
 import './PasswordReset.css';
 
@@ -27,27 +28,29 @@ const PasswordReset = () => {
 
   return (
     <div className="password-reset-container">
-      <div className="password-reset-card">
-        <h2>Recuperar Contraseña</h2>
-        <p className="description">
-          Ingresa tu email y te enviaremos un enlace para restablecer tu contraseña.
-        </p>
+      <div className="password-reset-form-card">
+        <div className="password-reset-header">
+          <h1>Recuperar contraseña</h1>
+          <p className="password-reset-subtitle">
+            Ingresa tu email y te enviaremos un enlace para restablecer tu contraseña
+          </p>
+        </div>
 
         {message && (
-          <div className="alert alert-success" role="alert">
+          <div className="success-alert" role="alert">
             {message}
           </div>
         )}
 
         {error && (
-          <div className="alert alert-danger" role="alert">
+          <div className="error-alert" role="alert">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit}>
+        <form className="password-reset-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Correo electrónico</label>
             <input
               type="email"
               id="email"
@@ -56,22 +59,23 @@ const PasswordReset = () => {
               required
               className="form-control"
               placeholder="tu@email.com"
+              autoComplete="email"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="btn btn-primary w-100"
+            className="btn-reset"
           >
-            {loading ? 'Enviando...' : 'Enviar Email de Recuperación'}
+            {loading ? 'ENVIANDO...' : 'Enviar email de recuperación'}
           </button>
         </form>
 
-        <div className="mt-3 text-center">
-          <a href="/login" className="text-decoration-none">
+        <div className="password-reset-links">
+          <Link to="/login" className="link-back">
             ← Volver al login
-          </a>
+          </Link>
         </div>
       </div>
     </div>
