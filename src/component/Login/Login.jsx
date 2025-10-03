@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
@@ -29,13 +29,17 @@ const Login = () => {
 
   return (
     <div className="login-container">
-      <div className="login-card">
-        <h2>Iniciar Sesión</h2>
-        {error && <div className="alert alert-danger">{error}</div>}
+      <div className="login-form-card">
+        <div className="login-header">
+          <h1>Iniciar sesión</h1>
+          <p className="login-subtitle">Accede a tu cuenta para continuar</p>
+        </div>
 
-        <form onSubmit={handleSubmit}>
+        {error && <div className="error-alert">{error}</div>}
+
+        <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Correo electrónico</label>
             <input
               type="email"
               id="email"
@@ -43,6 +47,8 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
               className="form-control"
+              placeholder="tu@email.com"
+              autoComplete="email"
             />
           </div>
 
@@ -55,21 +61,23 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
               className="form-control"
+              placeholder="••••••••"
+              autoComplete="current-password"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="btn btn-primary w-100"
+            className="btn-login"
           >
-            {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+            {loading ? 'INICIANDO SESIÓN...' : 'Iniciar sesión'}
           </button>
         </form>
 
-        <div className="mt-3 text-center">
-          <p>¿No tienes cuenta? <a href="/register">Regístrate aquí</a></p>
-          <p><a href="/password-reset">¿Olvidaste tu contraseña?</a></p>
+        <div className="login-links">
+          <p>¿No tienes cuenta? <Link to="/register" className="link-register">Regístrate aquí</Link></p>
+          <p><Link to="/password-reset" className="link-forgot">¿Olvidaste tu contraseña?</Link></p>
         </div>
       </div>
     </div>

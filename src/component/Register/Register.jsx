@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Register.css';
 
 const Register = () => {
@@ -46,11 +46,15 @@ const Register = () => {
 
   return (
     <div className="register-container">
-      <div className="register-card">
-        <h2>Crear Cuenta</h2>
-        {error && <div className="alert alert-danger">{error}</div>}
+      <div className="register-form-card">
+        <div className="register-header">
+          <h1>Crear cuenta</h1>
+          <p className="register-subtitle">Únete a nosotros y comienza tu experiencia</p>
+        </div>
 
-        <form onSubmit={handleSubmit}>
+        {error && <div className="error-alert">{error}</div>}
+
+        <form className="register-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Nombre completo</label>
             <input
@@ -60,11 +64,13 @@ const Register = () => {
               onChange={(e) => setName(e.target.value)}
               required
               className="form-control"
+              placeholder="Tu nombre completo"
+              autoComplete="name"
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Correo electrónico</label>
             <input
               type="email"
               id="email"
@@ -72,6 +78,8 @@ const Register = () => {
               onChange={(e) => setEmail(e.target.value)}
               required
               className="form-control"
+              placeholder="tu@email.com"
+              autoComplete="email"
             />
           </div>
 
@@ -84,6 +92,8 @@ const Register = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
               className="form-control"
+              placeholder="••••••••"
+              autoComplete="new-password"
             />
           </div>
 
@@ -96,20 +106,22 @@ const Register = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
               className="form-control"
+              placeholder="••••••••"
+              autoComplete="new-password"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="btn btn-primary w-100"
+            className="btn-register"
           >
-            {loading ? 'Creando cuenta...' : 'Crear Cuenta'}
+            {loading ? 'CREANDO CUENTA...' : 'Crear cuenta'}
           </button>
         </form>
 
-        <div className="mt-3 text-center">
-          <p>¿Ya tienes cuenta? <a href="/login">Inicia sesión aquí</a></p>
+        <div className="register-links">
+          <p>¿Ya tienes cuenta? <Link to="/login" className="link-login">Inicia sesión aquí</Link></p>
         </div>
       </div>
     </div>
