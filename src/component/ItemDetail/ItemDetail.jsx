@@ -47,9 +47,17 @@ const ItemDetail = ({ product }) => {
         ) : (
           <div className="agregado">
             <p>¡Producto agregado al carrito!</p>
-            <button className="go-to-cart" onClick={handleGoToCart}>
-              Ir al carrito
-            </button>
+            <div className="post-add-actions">
+              <button className="go-to-cart" onClick={handleGoToCart}>
+                Ir al carrito
+              </button>
+              <button 
+                className="continue-shopping" 
+                onClick={() => navigate('/productos')}
+              >
+                Seguir comprando
+              </button>
+            </div>
           </div>
         )}
       </div>
