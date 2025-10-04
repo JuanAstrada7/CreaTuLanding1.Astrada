@@ -13,7 +13,7 @@ const CartWidget = () => {
   };
 
   return (
-    <div className="cart-widget clickable" onClick={handleClick}>
+    <div className="cart-widget clickable" onClick={handleClick} title={totalItems > 0 ? `${totalItems} productos en el carrito` : 'Carrito vacío'}>
       <FaShoppingCart className="cart-icon" />
       {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
     </div>

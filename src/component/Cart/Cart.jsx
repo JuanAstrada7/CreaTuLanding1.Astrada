@@ -1,25 +1,71 @@
 import { useCart } from '../../context/CartContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart } from "react-icons/fa";
 import './Cart.css';
 
 const Cart = () => {
   const { cart, removeFromCart, clearCart, increaseQuantity, decreaseQuantity } = useCart();
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const navigate = useNavigate();
 
   if (cart.length === 0) {
     return (
-      <div className="cart-container cart-empty">
-        <FaShoppingCart className="cart-empty-icon" />
-        <h2>¡Tu carrito está vacío!</h2>
-        <p>Agrega productos para comenzar tu compra.</p>
-        <Link to="/productos" className="btn btn-primary">Ver productos</Link>
+      <div className="cart-container">
+        {/* Header de navegación para carrito vacío */}
+        <div className="cart-navigation-header">
+          <nav className="breadcrumb-nav">
+            <Link to="/" className="breadcrumb-link">Inicio</Link>
+            <span className="breadcrumb-separator">›</span>
+            <Link to="/productos" className="breadcrumb-link">Productos</Link>
+            <span className="breadcrumb-separator">›</span>
+            <span className="breadcrumb-current">Carrito</span>
+          </nav>
+          <button 
+            onClick={() => navigate(-1)} 
+            className="btn-back"
+            title="Volver atrás"
+          >
+            ← Volver
+          </button>
+        </div>
+
+        <div className="cart-empty">
+          <FaShoppingCart className="cart-empty-icon" />
+          <h2>¡Tu carrito está vacío!</h2>
+          <p>Agrega productos para comenzar tu compra.</p>
+          <div className="empty-cart-actions">
+            <Link to="/productos" className="btn btn-primary">
+              Ver productos
+            </Link>
+            <Link to="/" className="btn btn-outline">
+              Ir al inicio
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="cart-container">
+      {/* Header de navegación */}
+      <div className="cart-navigation-header">
+        <nav className="breadcrumb-nav">
+          <Link to="/" className="breadcrumb-link">Inicio</Link>
+          <span className="breadcrumb-separator">›</span>
+          <Link to="/productos" className="breadcrumb-link">Productos</Link>
+          <span className="breadcrumb-separator">›</span>
+          <span className="breadcrumb-current">Carrito</span>
+        </nav>
+        <button 
+          onClick={() => navigate(-1)} 
+          className="btn-back"
+          title="Volver atrás"
+        >
+          ← Volver
+        </button>
+      </div>
+
       <h2>Carrito de compras</h2>
       
       {/* Tabla para desktop */}
@@ -81,10 +127,27 @@ const Cart = () => {
         ))}
       </div>
       
-      <h4>Total: ${total}</h4>
+      <div className="cart-summary">
+        <h4>Total: ${total}</h4>
+        <p className="cart-items-count">
+          {cart.length} {cart.length === 1 ? 'producto' : 'productos'} en el carrito
+        </p>
+      </div>
+      
       <div className="cart-footer-buttons">
-        <button className="btn btn-secondary" onClick={clearCart}>Vaciar carrito</button>
-        <Link to="/checkout" className="btn btn-success">Finalizar compra</Link>
+        <div className="cart-actions-left">
+          <Link to="/productos" className="btn btn-continue-shopping">
+            Seguir comprando
+          </Link>
+          <button className="btn btn-secondary" onClick={clearCart}>
+            Vaciar carrito
+          </button>
+        </div>
+        <div className="cart-actions-right">
+          <Link to="/checkout" className="btn btn-success btn-checkout">
+            Finalizar compra
+          </Link>
+        </div>
       </div>
     </div>
   );
