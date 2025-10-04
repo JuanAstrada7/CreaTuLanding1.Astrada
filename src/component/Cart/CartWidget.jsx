@@ -13,7 +13,7 @@ const CartWidget = () => {
   };
 
   return (
-    <div className="cart-widget" onClick={handleClick} style={{ cursor: 'pointer' }}>
+    <div className="cart-widget clickable" onClick={handleClick}>
       <FaShoppingCart className="cart-icon" />
       {totalItems > 0 && <span className="cart-count">{totalItems}</span>}
     </div>

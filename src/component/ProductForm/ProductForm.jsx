@@ -218,8 +218,7 @@ const ProductForm = () => {
                     name="image"
                     accept="image/*"
                     onChange={handleImageChange}
-                    className="image-input"
-                    style={{ display: 'none' }}
+                    className="image-input hidden"
                   />
                   <label htmlFor="image" className="upload-btn">
                     Seleccionar imagen

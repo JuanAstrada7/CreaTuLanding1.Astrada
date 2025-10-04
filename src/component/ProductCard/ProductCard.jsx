@@ -15,19 +15,21 @@ const ProductCard = ({ product, onAddToCart }) => {
         <span>{quantity}</span>
         <button onClick={() => setQuantity(prev => prev + 1)}>+</button>
       </div>
-      <Link
-        to={`/item/${product.id}`}
-        className="btn btn-primary ver-detalle"
-      >
-        Ver detalle
-      </Link>
+      <div className="product-actions">
+        <Link
+          to={`/item/${product.id}`}
+          className="ver-detalle"
+        >
+          Ver detalle
+        </Link>
 
-      <button
-        className="add-to-cart"
-        onClick={() => onAddToCart({ ...product, quantity })}
-      >
-        Agregar al carrito
-      </button>
+        <button
+          className="add-to-cart"
+          onClick={() => onAddToCart({ ...product, quantity })}
+        >
+          Agregar al carrito
+        </button>
+      </div>
     </div>
   );
 };

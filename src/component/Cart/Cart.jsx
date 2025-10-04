@@ -39,7 +39,7 @@ const Cart = () => {
               <td>{item.name}</td>
               <td>
                 <button className="btn btn-light btn-sm" onClick={() => decreaseQuantity(item.id)} disabled={item.quantity <= 1}>-</button>
-                <span style={{ margin: "0 8px" }}>{item.quantity}</span>
+                <span className="quantity-display">{item.quantity}</span>
                 <button className="btn btn-light btn-sm" onClick={() => increaseQuantity(item.id)}>+</button>
               </td>
               <td>${item.price}</td>

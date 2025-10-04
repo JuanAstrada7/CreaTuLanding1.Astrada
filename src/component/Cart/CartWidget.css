@@ -1,10 +1,13 @@
 .cart-widget {
   position: relative;
-  cursor: pointer;
-  padding: 0.5rem;
+  padding: var(--spacing-sm);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--spacing-sm);
+}
+
+.cart-widget.clickable {
+  cursor: pointer;
 }
 
 .cart-icon {

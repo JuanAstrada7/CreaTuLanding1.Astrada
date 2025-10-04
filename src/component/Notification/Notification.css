@@ -15,6 +15,11 @@
 }
 
 .toast.bg-custom {
-  background: linear-gradient(90deg, #ff6b6b 0%, #ffb347 100%);
+  background: linear-gradient(90deg, var(--primary-color) 0%, #ffb347 100%);
   color: #fff;
+}
+
+/* Clase para z-index alto */
+.toast-high-z {
+  z-index: 9999;
 }

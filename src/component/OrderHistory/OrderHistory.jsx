@@ -81,9 +81,9 @@ const OrderHistory = () => {
           <div className="text-center">
             <h4>No tienes órdenes aún</h4>
             <p className="text-muted">¡Comienza a comprar nuestros deliciosos productos!</p>
-            <a href="/productos" className="btn btn-primary">
+            <Link to="/productos" className="btn btn-primary">
               Ver productos
-            </a>
+            </Link>
           </div>
         </div>
       ) : (

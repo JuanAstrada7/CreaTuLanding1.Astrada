@@ -30,19 +30,43 @@ const Contacto = () => {
     <div className="contacto-container">
       <h2>Contacto</h2>
       <form className="contacto-form" onSubmit={handleSubmit}>
-        <label>
-          Nombre:
-          <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} required />
-        </label>
-        <label>
-          Email:
-          <input type="email" name="email" value={formData.email} onChange={handleChange} required />
-        </label>
-        <label>
-          Mensaje:
-          <textarea name="mensaje" rows="4" value={formData.mensaje} onChange={handleChange} required />
-        </label>
-        <button type="submit">Enviar</button>
+        <div className="form-group">
+          <label htmlFor="nombre">Nombre:</label>
+          <input 
+            type="text" 
+            id="nombre"
+            name="nombre" 
+            value={formData.nombre} 
+            onChange={handleChange} 
+            required 
+            className="form-control"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input 
+            type="email" 
+            id="email"
+            name="email" 
+            value={formData.email} 
+            onChange={handleChange} 
+            required 
+            className="form-control"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="mensaje">Mensaje:</label>
+          <textarea 
+            id="mensaje"
+            name="mensaje" 
+            rows="4" 
+            value={formData.mensaje} 
+            onChange={handleChange} 
+            required 
+            className="form-control"
+          />
+        </div>
+        <button type="submit" className="btn-contacto">Enviar</button>
       </form>
       {mensaje && <p className="contacto-mensaje">{mensaje}</p>}
       <div className="contacto-info">

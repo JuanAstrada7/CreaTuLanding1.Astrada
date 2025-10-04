@@ -504,3 +504,8 @@ textarea.form-control {
   outline: 2px solid #ff6b6b;
   outline-offset: 2px;
 }
+
+/* Clase utility para ocultar elementos */
+.hidden {
+  display: none;
+}

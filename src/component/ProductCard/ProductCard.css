@@ -101,3 +101,11 @@
   border-color: var(--gray-300);
   transform: translateY(-2px);
 }
+
+/* Container para actions */
+.product-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}

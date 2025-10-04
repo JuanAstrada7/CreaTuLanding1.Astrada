@@ -15,8 +15,7 @@ const Notification = () => {
 
   return (
     <div
-      className="toast-container position-fixed top-0 start-50 translate-middle-x p-3"
-      style={{ zIndex: 9999 }}
+      className="toast-container position-fixed top-0 start-50 translate-middle-x p-3 toast-high-z"
     >
       <div
         ref={toastRef}

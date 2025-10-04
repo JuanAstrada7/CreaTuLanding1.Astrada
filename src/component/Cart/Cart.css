@@ -247,3 +247,12 @@
     display: none;
   }
 }
+
+/* Clase para quantity display */
+.quantity-display {
+  margin: 0 var(--spacing-sm);
+  font-weight: 600;
+  min-width: 30px;
+  text-align: center;
+  display: inline-block;
+}
