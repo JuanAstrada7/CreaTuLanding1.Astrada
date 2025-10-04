@@ -1,50 +1,65 @@
 .home-container {
   width: 100%;
   margin: 0 auto;
-  padding-bottom: 2rem;
+  padding-bottom: var(--spacing-xl);
 }
 
 .home-bienvenida {
-  padding: 2rem;
+  padding: var(--spacing-xl);
   text-align: center;
-  background: #f8f8f8;
+  background: var(--gray-50);
 }
 
 .home-img {
   max-width: 400px;
   width: 100%;
-  border-radius: 1rem;
-  margin: 2rem auto;
+  border-radius: var(--border-radius-lg);
+  margin: var(--spacing-xl) auto;
   display: block;
 }
 
 .home-btn-productos {
   display: inline-block;
-  margin-top: 1.5rem;
-  padding: 0.75rem 2rem;
-  background-color: #e57373;
+  margin-top: var(--spacing-lg);
+  padding: 0.75rem var(--spacing-xl);
+  background-color: var(--secondary-color);
   color: #fff;
   font-weight: bold;
-  border-radius: 0.5rem;
+  border-radius: var(--border-radius-sm);
   text-decoration: none;
-  transition: background 0.2s;
-  min-height: 44px; /* Tamaño mínimo para touch */
+  transition: var(--transition-normal);
+  min-height: 44px;
 }
 
 .home-btn-productos:hover {
-  background-color: #e57373;
-  border: 2px solid #686767;
+  background-color: var(--secondary-hover);
+  border: 2px solid var(--gray-600);
 }
 
 .home-promociones {
   background: #ffe4e1;
-  padding: 1.5rem;
-  margin: 2rem 0;
-  border-radius: 1rem;
+  padding: var(--spacing-lg);
+  margin: var(--spacing-xl) 0;
+  border-radius: var(--border-radius-lg);
   text-align: center;
 }
 
-/* Responsive Design */
+/* Responsive Design - Ordenado correctamente */
+@media (max-width: 992px) {
+  .home-container {
+    padding-bottom: var(--spacing-lg);
+  }
+  
+  .home-bienvenida {
+    padding: var(--spacing-lg) var(--spacing-md);
+  }
+  
+  .home-img {
+    max-width: 350px;
+    margin: var(--spacing-lg) auto;
+  }
+}
+
 @media (max-width: 768px) {
   .home-container {
     padding-bottom: 1rem;

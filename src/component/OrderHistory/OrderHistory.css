@@ -1,5 +1,5 @@
 .order-history-container {
-  padding: 2rem;
+  padding: var(--spacing-xl);
   max-width: 1200px;
   margin: 0 auto;
   min-height: 80vh;
@@ -7,8 +7,8 @@
 
 .order-history-container h2 {
   text-align: center;
-  margin-bottom: 2rem;
-  color: #333;
+  margin-bottom: var(--spacing-xl);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -22,34 +22,35 @@
 .orders-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--spacing-lg);
 }
 
 .order-card {
-  background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: var(--bg-primary);
+  border: var(--border-light);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
 }
 
 .order-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid #f8f9fa;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: var(--border-medium);
+  border-bottom-color: var(--gray-100);
 }
 
 .order-header h4 {
-  margin: 0 0 0.5rem 0;
-  color: #ff6b6b;
+  margin: 0 0 var(--spacing-sm) 0;
+  color: var(--primary-color);
   font-weight: 600;
 }
 
 .order-date {
-  color: #6c757d;
+  color: var(--gray-600);
   font-size: 0.9rem;
 }
 
@@ -137,34 +138,34 @@
   letter-spacing: 0.5px;
 }
 
-.badge.bg-warning {
-  background-color: #ffc107 !important;
-  color: #000 !important;
+.order-status .badge.bg-warning {
+  background-color: var(--warning-color);
+  color: #000;
 }
 
-.badge.bg-info {
-  background-color: #17a2b8 !important;
-  color: #fff !important;
+.order-status .badge.bg-info {
+  background-color: var(--info-color);
+  color: #fff;
 }
 
-.badge.bg-primary {
-  background-color: #e74c3c !important;
-  color: #fff !important;
+.order-status .badge.bg-primary {
+  background-color: var(--primary-color);
+  color: #fff;
 }
 
-.badge.bg-success {
-  background-color: #28a745 !important;
-  color: #fff !important;
+.order-status .badge.bg-success {
+  background-color: var(--success-color);
+  color: #fff;
 }
 
-.badge.bg-danger {
-  background-color: #dc3545 !important;
-  color: #fff !important;
+.order-status .badge.bg-danger {
+  background-color: var(--danger-color);
+  color: #fff;
 }
 
-.badge.bg-secondary {
-  background-color: #6c757d !important;
-  color: #fff !important;
+.order-status .badge.bg-secondary {
+  background-color: var(--gray-600);
+  color: #fff;
 }
 
 .error-container .alert {

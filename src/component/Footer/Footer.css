@@ -1,23 +1,24 @@
 .footer {
-  background: #e57373;
-  color: #fff;
+  background: var(--secondary-color);
+  color: white;
   text-align: center;
-  padding: 1rem 0;
-  margin-top: 2rem;
+  padding: var(--spacing-md) 0;
+  margin-top: var(--spacing-xl);
 }
 
 .footer-links {
-  margin-top: 0.5rem;
+  margin-top: var(--spacing-sm);
 }
 
 .footer-links a {
-  color: #fff;
-  margin: 0 1rem;
+  color: white;
+  margin: 0 var(--spacing-md);
   text-decoration: none;
   font-weight: bold;
-  transition: text-decoration 0.2s;
+  transition: var(--transition-normal);
 }
 
 .footer-links a:hover {
   text-decoration: underline;
+  color: var(--gray-100);
 }

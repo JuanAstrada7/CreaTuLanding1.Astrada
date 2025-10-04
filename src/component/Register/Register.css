@@ -1,7 +1,7 @@
 /* Register - Diseño moderno consistente con Login */
 .register-container {
-  padding: 2rem 0;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: var(--spacing-xl) 0;
+  background: var(--bg-gradient);
   min-height: calc(100vh - 200px);
   display: flex;
   justify-content: center;
@@ -13,14 +13,14 @@
 }
 
 .register-form-card {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
+  background: var(--bg-primary);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-xl);
+  border: var(--border-light);
   padding: 2.5rem;
   width: 100%;
   max-width: 500px;
-  margin: 1rem;
+  margin: var(--spacing-md);
 }
 
 .register-header {
@@ -187,7 +187,21 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Responsive Design */
+/* Responsive Design - Ordenado correctamente */
+@media (max-width: 992px) {
+  .register-container {
+    padding: var(--spacing-md) 0;
+    min-height: calc(100vh - 150px);
+  }
+  
+  .register-form-card {
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    margin: var(--spacing-sm);
+    max-width: 450px;
+  }
+}
+
 @media (max-width: 768px) {
   .register-container {
     padding: 1rem 0;

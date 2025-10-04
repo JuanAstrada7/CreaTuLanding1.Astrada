@@ -1,40 +1,40 @@
 .product-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-  margin: 1rem;
+  border: var(--border-light);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  margin: var(--spacing-md);
   width: 250px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-  background-color: rgb(218, 216, 216);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-normal);
+  background-color: var(--bg-primary);
   text-align: center;
 }
 
 .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-md);
 }
 
 .product-card img {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 4px;
-  margin-bottom: 1rem;
+  border-radius: var(--border-radius-sm);
+  margin-bottom: var(--spacing-md);
 }
 
 .product-card h3 {
-  margin: 0.5rem 0;
+  margin: var(--spacing-sm) 0;
   font-size: 1.2rem;
-  color: #333;
+  color: var(--text-primary);
   text-align: center;
 }
 
 .product-card .price {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #2c3e50;
-  margin: 0.5rem 0;
+  color: var(--text-primary);
+  margin: var(--spacing-sm) 0;
   text-align: center;
 }
 
@@ -69,28 +69,35 @@
 .add-to-cart {
   width: 100%;
   padding: 0.8rem;
-  background-color: #333;
+  background-color: var(--gray-800);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: var(--transition-normal);
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: var(--spacing-sm);
 }
 
 .add-to-cart:hover {
-  background-color: #333;
+  background-color: var(--gray-900);
+  transform: translateY(-2px);
 }
 
 .ver-detalle {
-  background-color: #ff6b6b;
-  border: 1px solid #ddd;
+  background-color: var(--primary-color);
+  border: 1px solid transparent;
   margin-top: 0;
   display: inline-block;
+  transition: var(--transition-normal);
+  border-radius: var(--border-radius-sm);
+  padding: 0.8rem;
+  color: white;
+  text-decoration: none;
 }
 
 .ver-detalle:hover {
-  border: 1px solid #ddd;
-  background-color: rosybrown;
+  background-color: var(--primary-hover);
+  border-color: var(--gray-300);
+  transform: translateY(-2px);
 }

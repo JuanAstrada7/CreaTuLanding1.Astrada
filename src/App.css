@@ -1,3 +1,72 @@
+/* Variables CSS para consistencia global */
+:root {
+  /* Colores primarios */
+  --primary-color: #ff6b6b;
+  --primary-hover: #ee5a52;
+  --primary-light: #ff8787;
+  
+  /* Colores secundarios */
+  --secondary-color: #e57373;
+  --secondary-hover: #d32f2f;
+  
+  /* Colores de estado */
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --info-color: #17a2b8;
+  
+  /* Grises */
+  --gray-50: #f8f9fa;
+  --gray-100: #f1f3f4;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-400: #ced4da;
+  --gray-500: #adb5bd;
+  --gray-600: #6c757d;
+  --gray-700: #495057;
+  --gray-800: #343a40;
+  --gray-900: #212529;
+  
+  /* Texto */
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #9ca3af;
+  
+  /* Espaciados */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 3rem;
+  
+  /* Bordes */
+  --border-radius: 8px;
+  --border-radius-sm: 4px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  
+  /* Sombras */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 10px 40px rgba(0, 0, 0, 0.1);
+  
+  /* Transiciones */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Borders */
+  --border-light: 1px solid #e2e8f0;
+  --border-medium: 2px solid #e2e8f0;
+  
+  /* Backgrounds */
+  --bg-primary: white;
+  --bg-secondary: #f8f9fa;
+  --bg-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -22,4 +91,53 @@ html, body {
 
 p {
   margin: 0;
+}
+
+/* Media queries globales para consistencia */
+@media (max-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+    max-width: 960px;
+    padding: 0 var(--spacing-md);
+  }
+  
+  /* Ajustes globales para tablet */
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 720px;
+    padding: 0 var(--spacing-sm);
+  }
+  
+  /* Ajustes globales para tablet pequeño */
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+  h3 { font-size: 1.1rem; }
+}
+
+@media (max-width: 576px) {
+  .container {
+    max-width: 540px;
+    padding: 0 var(--spacing-sm);
+  }
+  
+  /* Ajustes globales para móvil */
+  h1 { font-size: 1.25rem; }
+  h2 { font-size: 1.1rem; }
+  h3 { font-size: 1rem; }
+  
+  /* Botones más grandes en móvil para touch */
+  .btn {
+    min-height: 44px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
 }

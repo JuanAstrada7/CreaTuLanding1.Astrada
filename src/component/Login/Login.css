@@ -1,7 +1,7 @@
 /* Login - Diseño moderno consistente con ProductForm */
 .login-container {
-  padding: 2rem 0;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: var(--spacing-xl) 0;
+  background: var(--bg-gradient);
   min-height: calc(100vh - 200px);
   display: flex;
   justify-content: center;
@@ -13,32 +13,32 @@
 }
 
 .login-form-card {
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
+  background: var(--bg-primary);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-xl);
+  border: var(--border-light);
   padding: 2.5rem;
   width: 100%;
   max-width: 450px;
-  margin: 1rem;
+  margin: var(--spacing-md);
 }
 
 .login-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-xl);
 }
 
 .login-header h1 {
-  color: #1e293b;
+  color: var(--text-primary);
   font-size: 2rem;
   font-weight: 700;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 var(--spacing-sm) 0;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .login-subtitle {
-  color: #64748b;
+  color: var(--text-secondary);
   font-size: 1rem;
   margin: 0;
   font-weight: 400;
@@ -111,19 +111,19 @@
 
 .btn-login {
   width: 100%;
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
   color: white;
   border: none;
-  padding: 1rem 2rem;
-  border-radius: 8px;
+  padding: var(--spacing-md) var(--spacing-xl);
+  border-radius: var(--border-radius);
   font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition-normal);
   box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
-  margin-top: 1rem;
+  margin-top: var(--spacing-md);
   min-height: 50px;
 }
 
@@ -199,7 +199,22 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Responsive Design */
+/* Responsive Design - Ordenado correctamente */
+@media (max-width: 992px) {
+  .login-container {
+    padding: var(--spacing-md) 0;
+    min-height: calc(100vh - 150px);
+    background: var(--bg-gradient);
+  }
+  
+  .login-form-card {
+    padding: var(--spacing-xl);
+    border-radius: var(--border-radius-lg);
+    margin: var(--spacing-sm);
+    max-width: 400px;
+  }
+}
+
 @media (max-width: 768px) {
   .login-container {
     padding: 1rem 0;
